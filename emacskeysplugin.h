@@ -19,7 +19,7 @@
 
 #include <extensionsystem/iplugin.h>
 
-namespace Emacskeys {
+namespace EmacsKeys {
 namespace Internal {
 
 class EmacsKeysHandler;

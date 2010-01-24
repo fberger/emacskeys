@@ -597,7 +597,7 @@ void EmacsKeysPluginPrivate::changeSelection
 {
     if (EmacsKeysHandler *handler = qobject_cast<EmacsKeysHandler *>(sender()))
         if (BaseTextEditor *bt = qobject_cast<BaseTextEditor *>(handler->widget()))
-            bt->setExtraSelections(BaseTextEditor::EmacsKeysSelection, selection);
+            bt->setExtraSelections(BaseTextEditor::FakeVimSelection, selection);
 }
 
 
