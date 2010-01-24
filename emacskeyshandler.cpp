@@ -64,7 +64,7 @@
 #include <QtGui/QTextEdit>
 
 
-//#define DEBUG_KEY  1
+#define DEBUG_KEY  1
 #if DEBUG_KEY
 #   define KEY_DEBUG(s) qDebug() << s
 #else
@@ -434,14 +434,8 @@ bool EmacsKeysHandler::Private::wantsOverride(QKeyEvent *ev)
     }
 
     // We are interested in overriding  most Ctrl key combinations
-    if (mods == Qt::ControlModifier && key >= Key_A && key <= Key_Z && key != Key_K) {
+    if (mods == Qt::ControlModifier && key >= Key_A && key <= Key_Z) {
         // Ctrl-K is special as it is the Core's default notion of QuickOpen
-        if (m_passing) {
-            KEY_DEBUG(" PASSING CTRL KEY");
-            // We get called twice on the same key
-            //m_passing = false;
-            return false;
-        }
         KEY_DEBUG(" NOT PASSING CTRL KEY");
         //updateMiniBuffer();
         return true;

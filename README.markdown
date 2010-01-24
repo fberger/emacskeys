@@ -4,9 +4,9 @@ make the resulting text in the editor look like it was using vim.
 
 There are only a few files in here:
 
-  emacskeysplugin.{h,cpp}  - interaction with the rest of Creator
-  emacskeysactions.{h,cpp} - settings
-  emacskeyshandler.{h,cpp} - the "real" event
+* emacskeysplugin.{h,cpp}  - interaction with the rest of Creator
+* emacskeysactions.{h,cpp} - settings
+* emacskeyshandler.{h,cpp} - the "real" event
 
 There are some more hints for developers in emacskeyshandler.cpp
 
