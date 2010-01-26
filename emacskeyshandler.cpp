@@ -210,6 +210,7 @@ public:
     EventResult handleCommandMode(int key, int unmodified, const QString &text);
     EventResult handleRegisterMode(int key, int unmodified, const QString &text);
     EventResult handleMiniBufferModes(int key, int unmodified, const QString &text);
+    bool exactMatch(int key, const QKeySequence& keySequence);
     void finishMovement(const QString &text = QString());
     void search(const QString &needle, bool forward);
     void highlightMatches(const QString &needle);
@@ -445,29 +446,25 @@ bool EmacsKeysHandler::Private::wantsOverride(QKeyEvent *ev)
     return false;
 }
 
+bool EmacsKeysHandler::Private::exactMatch(int key, const QKeySequence& keySequence)
+{
+    return QKeySequence(key).matches(keySequence) == QKeySequence::ExactMatch;
+}
+
 EventResult EmacsKeysHandler::Private::handleEvent(QKeyEvent *ev)
 {
     int key = ev->key();
     const int um = key; // keep unmodified key around
     const int mods = ev->modifiers();
+    QKeySequence keySequence(ev->key() + ev->modifiers());
+
+    qDebug() << "sequence: " << keySequence << endl;
 
     if (key == Key_Shift || key == Key_Alt || key == Key_Control
             || key == Key_Alt || key == Key_AltGr || key == Key_Meta)
     {
         KEY_DEBUG("PLAIN MODIFIER");
         return EventUnhandled;
-    }
-
-    if (m_passing) {
-        KEY_DEBUG("PASSING PLAIN KEY..." << ev->key() << ev->text());
-        //if (key == ',') { // use ',,' to leave, too.
-        //    qDebug() << "FINISHED...";
-        //    return EventHandled;
-        //}
-        m_passing = false;
-        updateMiniBuffer();
-        KEY_DEBUG("   PASS TO CORE");
-        return EventPassedToCore;
     }
 
     // Fake "End of line"
@@ -493,7 +490,26 @@ EventResult EmacsKeysHandler::Private::handleEvent(QKeyEvent *ev)
     //    joinPreviousEditBlock();
     //else
     //    beginEditBlock();
-    EventResult result = handleKey(key, um, ev->text());
+    EventResult result = EventHandled;
+    if (exactMatch(Qt::CTRL + Qt::Key_N, keySequence)) {
+        moveDown();
+    } else if (exactMatch(Qt::CTRL + Qt::Key_P, keySequence)) {
+        moveUp();
+    } else if (exactMatch(Qt::CTRL + Qt::Key_A, keySequence)) {
+        moveToStartOfLine();
+    } else if (exactMatch(Qt::CTRL + Qt::Key_E, keySequence)) {
+        moveToEndOfLine();
+    } else if (exactMatch(Qt::CTRL + Qt::Key_B, keySequence)) {
+        moveLeft();
+    } else if (exactMatch(Qt::CTRL + Qt::Key_F, keySequence)) {
+        moveRight();
+    } else if (exactMatch(Qt::ALT + Qt::Key_B, keySequence)) {
+        moveToWordBoundary(false, false);
+    } else if (exactMatch(Qt::ALT + Qt::Key_F, keySequence)) {
+        moveToNextWord(false);
+    } else {
+        result = handleKey(key, um, ev->text());
+    }
     //endEditBlock();
 
     // We fake vi-style end-of-line behaviour
@@ -572,7 +588,7 @@ void EmacsKeysHandler::Private::restoreWidget()
 EventResult EmacsKeysHandler::Private::handleKey(int key, int unmodified,
     const QString &text)
 {
-    //qDebug() << "KEY: " << key << text << "POS: " << m_tc.position();
+    qDebug() << "KEY: " << key << text << "POS: " << m_tc.position();
     if (m_mode == InsertMode)
         return handleInsertMode(key, unmodified, text);
     if (m_mode == CommandMode)

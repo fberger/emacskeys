@@ -1,2 +1,5 @@
 *~
 Makefile*
+.moc
+.obj
+.uic

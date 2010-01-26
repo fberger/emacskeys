@@ -16,12 +16,18 @@ QT += gui
 SOURCES += \
     emacskeysactions.cpp \
     emacskeyshandler.cpp \
-    emacskeysplugin.cpp
+    emacskeysplugin.cpp \
+    killring.cpp \
+    markring.cpp
 
 HEADERS += \
     emacskeysactions.h \
     emacskeyshandler.h \
-    emacskeysplugin.h
+    emacskeysplugin.h \
+    mark.h \
+    markring.h \
+    killring.h \
+
 
 FORMS += \
     emacskeysoptions.ui
