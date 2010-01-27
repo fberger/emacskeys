@@ -215,6 +215,23 @@ public:
     void search(const QString &needle, bool forward);
     void highlightMatches(const QString &needle);
 
+  /*
+  void yankPop(QTextEdit* view);
+  void setMark();
+  void exchangeDotAndMark();
+  void popToMark();
+  void copy();
+  void cut();
+  void yank();
+  void killLine();
+  void nextLine();
+  void previousLine();
+  void forwardChar();
+  void backwardChar();
+  void deleteNextChar();
+  void charactersInserted(int line, int column, const QString& text);
+  */
+
     int mvCount() const { return m_mvcount.isEmpty() ? 1 : m_mvcount.toInt(); }
     int opCount() const { return m_opcount.isEmpty() ? 1 : m_opcount.toInt(); }
     int count() const { return mvCount() * opCount(); }
@@ -451,6 +468,228 @@ bool EmacsKeysHandler::Private::exactMatch(int key, const QKeySequence& keySeque
     return QKeySequence(key).matches(keySequence) == QKeySequence::ExactMatch;
 }
 
+/*
+void EmacsKeysHandler::Private::yankPop(QTextEdit* view)
+{
+  qDebug() << "yankPop called " << endl;
+  if (KillRing::instance()->currentYankView() != view) {
+    qDebug() << "the last previous yank was not in this view" << endl;
+    // generate beep and return
+    QApplication::beep();
+    return;
+  }
+
+  unsigned int l, c;
+  KTextEditor::viewCursorInterface(view)->cursorPositionReal(&l, &c);
+  if (l != endLine || c != endColumn) {
+    qDebug() << "Cursor has been moved in the meantime" << endl;
+    qDebug() << "lines " << endLine << " " << l << endl;
+    qDebug() << "columns " << endColumn << " " << c << endl;
+    QApplication::beep();
+    return;
+  }
+
+  QString next(KillRing::instance()->next());
+  if (!next.isEmpty()) {
+    KTextEditor::EditInterface* editor = 
+      KTextEditor::editInterface(view->document());
+    KTextEditor::editInterfaceExt(view->document())->editBegin();
+    editor->removeText(startLine, startColumn, endLine, endColumn);
+    editor->insertText(startLine, startColumn, next);
+    KTextEditor::viewCursorInterface(view)->cursorPositionReal(&endLine, 
+							       &endColumn);
+    KTextEditor::editInterfaceExt(view->document())->editEnd();
+  }
+  else {
+    QApplication::beep();
+  }
+}
+
+void EmacsKeysHandler::Private::setMark()
+{
+  unsigned int line, column;
+  KTextEditor::viewCursorInterface(view)->cursorPositionReal(&line, &column);
+  qDebug() << "Set mark " << line << " " << column << endl;
+  ring.addMark(line, column);
+}
+
+void EmacsKeysHandler::Private::exchangeDotAndMark()
+{
+  unsigned int line, column;
+  KTextEditor::viewCursorInterface(view)->cursorPositionReal(&line, &column);
+  ring.addMark(line, column);
+  popToMark();
+}
+
+void EmacsKeysHandler::Private::popToMark()
+{
+  qDebug() << "pop mark" << endl;
+  Mark mark(ring.getPreviousMark());
+  if (mark.valid) {
+    KTextEditor::viewCursorInterface(view)->setCursorPositionReal(mark.line,
+								  mark.column);
+  }
+  else {
+    QApplication::beep();
+  }
+}
+
+void EmacsKeysHandler::Private::copy()
+{
+  qDebug() << "emacs copy" << endl;
+  Mark mark(ring.getMostRecentMark());
+  if (mark.valid) {
+    unsigned int line, column;
+    KTextEditor::viewCursorInterface(view)->cursorPositionReal(&line, &column);
+    KTextEditor::selectionInterface(view->document())->setSelection
+      (mark.line, mark.column, line, column);
+    KTextEditor::clipboardInterface(view)->copy();
+    KTextEditor::selectionInterface(view->document())->clearSelection();
+    KTextEditor::viewStatusMsgInterface(view)->viewStatusMsg
+      (KStringHandler::csqueeze(QApplication::clipboard()->text(), 60));
+  }
+  else {
+    QApplication::beep();
+  }
+}
+
+void EmacsKeysHandler::Private::cut()
+{
+  qDebug() << "emacs cut" << endl;
+  Mark mark(ring.getMostRecentMark());
+  if (mark.valid) {
+    unsigned int line, column;
+    KTextEditor::viewCursorInterface(view)->cursorPositionReal(&line, &column);
+    KTextEditor::selectionInterface(view->document())->setSelection
+      (mark.line, mark.column, line, column);
+    KTextEditor::clipboardInterface(view)->cut();
+  }
+  else {
+    QApplication::beep();
+  }
+}
+
+void EmacsKeysHandler::Private::yank()
+{
+  qDebug() << "emacs yank" << endl;
+  unsigned l, c;
+  KTextEditor::viewCursorInterface(view)->cursorPositionReal(&l, &c);
+  startLine = (unsigned int)l;
+  startColumn = (unsigned int)c;
+  KTextEditor::clipboardInterface(view)->paste();
+  KTextEditor::viewCursorInterface(view)->cursorPositionReal(&endLine,
+							     &endColumn);
+  if (l != endLine || c != endColumn) {
+    KillRing::instance()->setCurrentYankView(view);
+  }
+}
+
+void EmacsKeysHandler::Private::killLine()
+{
+  unsigned int line, column;
+  KTextEditor::viewCursorInterface(view)->cursorPositionReal(&line, &column);
+  int length = KTextEditor::editInterface(view->document())->lineLength(line);
+
+  // remove line break
+  if (column == (unsigned int)length) {
+    KTextEditor::editInterface(view->document())->removeText(line, column, 
+							     line + 1, 0);
+    return;
+  }
+  
+  KTextEditor::selectionInterface(view->document())->setSelection
+    (line, column, line, length);
+  KTextEditor::clipboardInterface(view)->cut();
+}
+
+void EmacsKeysHandler::Private::nextLine()
+{
+  unsigned int line, column;
+  KTextEditor::viewCursorInterface(view)->cursorPositionReal(&line, &column);
+  unsigned int lines = KTextEditor::editInterface(view->document())->numLines();
+  if (++line < lines) {
+    KTextEditor::viewCursorInterface(view)->setCursorPositionReal(line, column);
+  }
+  else {
+    QApplication::beep();
+  }
+}
+
+void EmacsKeysHandler::Private::previousLine()
+{
+  unsigned int line, column;
+  KTextEditor::viewCursorInterface(view)->cursorPositionReal(&line, &column);
+  if (line > 0) {
+    KTextEditor::viewCursorInterface(view)->setCursorPositionReal(--line, 
+								  column);
+  }
+  else {
+    QApplication::beep();
+  }
+}
+
+void EmacsKeysHandler::Private::forwardChar()
+{
+  unsigned int line, column;
+  KTextEditor::viewCursorInterface(view)->cursorPositionReal(&line, &column);
+  int length = KTextEditor::editInterface(view->document())->lineLength(line);
+  if (column < (unsigned int)length) {
+    KTextEditor::viewCursorInterface(view)->setCursorPositionReal(line, 
+								  ++column);
+  }
+  else {
+    unsigned int lines =
+      KTextEditor::editInterface(view->document())->numLines();
+    if (++line < lines) {
+      KTextEditor::viewCursorInterface(view)->setCursorPositionReal(line, 0);
+    }
+    else {
+      QApplication::beep();
+    }
+  }
+}
+
+void EmacsKeysHandler::Private::backwardChar()
+{
+  unsigned int line, column;
+  KTextEditor::viewCursorInterface(view)->cursorPositionReal(&line, &column);
+  if (column > 0) {
+    KTextEditor::viewCursorInterface(view)->setCursorPositionReal(line, 
+								  --column);
+  }
+  else {
+    KTextEditor::viewCursorInterface(view)->setCursorPositionReal(line, 0);
+    previousLine();
+  }
+}
+
+void EmacsKeysHandler::Private::deleteNextChar()
+{
+  unsigned int line, column;
+  KTextEditor::viewCursorInterface(view)->cursorPositionReal(&line, &column);
+  int length = KTextEditor::editInterface(view->document())->lineLength(line);
+  if (column == (unsigned int)length) {
+    KTextEditor::editInterface(view->document())->removeText(line, column, 
+							     line + 1, 0);
+  }
+  else {
+    KTextEditor::editInterface(view->document())->removeText(line, column, line,
+							     column + 1);
+  }
+}
+
+void EmacsKeysHandler::Private::charactersInserted(int l, int c, const QString& text)
+{
+  qDebug() << "characters inserted " << text << " " << l << " " << c << endl;
+  KillRing::instance()->setCurrentYankView(view);
+  startLine = l;
+  startColumn = c;
+  KTextEditor::viewCursorInterface(view)->cursorPositionReal(&endLine, 
+							     &endColumn);
+}
+
+*/
+
 EventResult EmacsKeysHandler::Private::handleEvent(QKeyEvent *ev)
 {
     int key = ev->key();
@@ -486,10 +725,7 @@ EventResult EmacsKeysHandler::Private::handleEvent(QKeyEvent *ev)
     }
 
     m_undoCursorPosition[m_tc.document()->revision()] = m_tc.position();
-    //if (m_mode == InsertMode)
-    //    joinPreviousEditBlock();
-    //else
-    //    beginEditBlock();
+
     EventResult result = EventHandled;
     if (exactMatch(Qt::CTRL + Qt::Key_N, keySequence)) {
         moveDown();
@@ -507,16 +743,15 @@ EventResult EmacsKeysHandler::Private::handleEvent(QKeyEvent *ev)
         moveToWordBoundary(false, false);
     } else if (exactMatch(Qt::ALT + Qt::Key_F, keySequence)) {
         moveToNextWord(false);
+    } else if (exactMatch(Qt::CTRL + Qt::Key_D, keySequence)) {
+      m_tc.deleteChar();
+    } else if (exactMatch(Qt::ALT + Qt::SHIFT + Qt::Key_Less, keySequence)) {
+      m_tc.movePosition(QTextCursor::Start, QTextCursor::MoveAnchor);
+    } else if (exactMatch(Qt::ALT + Qt::SHIFT + Qt::Key_Greater, keySequence)) {
+      m_tc.movePosition(QTextCursor::End, QTextCursor::MoveAnchor);
     } else {
         result = handleKey(key, um, ev->text());
     }
-    //endEditBlock();
-
-    // We fake vi-style end-of-line behaviour
-    m_fakeEnd = (atEndOfLine() && m_mode == CommandMode);
-
-    if (m_fakeEnd)
-        moveLeft();
 
     m_oldTc = m_tc;
     EDITOR(setTextCursor(m_tc));
