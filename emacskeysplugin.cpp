@@ -311,12 +311,7 @@ bool EmacsKeysPluginPrivate::initialize()
     actionContainer = actionManager->actionContainer(Core::Constants::MENU_BAR);
     qDebug() << menu->parentWidget()->metaObject()->className() << endl;
     QMainWindow* mainWindow = qobject_cast<QMainWindow*>(menu->parentWidget());
-    QMenuBar* menuBar = mainWindow->menuBar();
-    if (!menuBar) {
-        qDebug() << "no menu bar" << endl;
-    }
     foreach(QObject* child, mainWindow->children()) {
-        qDebug() << child->metaObject()->className() << endl;
         if (QMenu* menuChild = qobject_cast<QMenu*>(child)) {
             if (replacements.contains(menuChild->title())) {
                 menuChild->setTitle(replacements[menuChild->title()]);

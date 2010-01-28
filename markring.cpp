@@ -7,9 +7,9 @@ MarkRing::MarkRing()
 
 }
 
-void MarkRing::addMark(unsigned int line, unsigned int column)
+void MarkRing::addMark(int position)
 {
-  Mark mark(line, column);
+  Mark mark(position);
   if (ring.isEmpty() || ring.first() != mark) {
     ring.prepend(mark);
   }

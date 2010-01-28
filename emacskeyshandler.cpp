@@ -63,6 +63,7 @@
 #include <QtGui/QTextDocumentFragment>
 #include <QtGui/QTextEdit>
 
+#include "markring.h"
 
 #define DEBUG_KEY  1
 #if DEBUG_KEY
@@ -217,7 +218,9 @@ public:
 
   /*
   void yankPop(QTextEdit* view);
+  */
   void setMark();
+  /*
   void exchangeDotAndMark();
   void popToMark();
   void copy();
@@ -326,6 +329,7 @@ public:
     QString m_mvcount;
     QString m_opcount;
     MoveType m_moveType;
+    MarkRing markRing;
 
     bool m_fakeEnd;
 
@@ -505,14 +509,14 @@ void EmacsKeysHandler::Private::yankPop(QTextEdit* view)
   }
 }
 
+*/
+
 void EmacsKeysHandler::Private::setMark()
 {
-  unsigned int line, column;
-  KTextEditor::viewCursorInterface(view)->cursorPositionReal(&line, &column);
-  qDebug() << "Set mark " << line << " " << column << endl;
-  ring.addMark(line, column);
+  markRing.addMark(m_tc.position());
 }
 
+/*
 void EmacsKeysHandler::Private::exchangeDotAndMark()
 {
   unsigned int line, column;
@@ -744,17 +748,19 @@ EventResult EmacsKeysHandler::Private::handleEvent(QKeyEvent *ev)
     } else if (exactMatch(Qt::ALT + Qt::Key_F, keySequence)) {
         moveToNextWord(false);
     } else if (exactMatch(Qt::CTRL + Qt::Key_D, keySequence)) {
-      m_tc.deleteChar();
+        m_tc.deleteChar();
     } else if (exactMatch(Qt::ALT + Qt::SHIFT + Qt::Key_Less, keySequence)) {
-      m_tc.movePosition(QTextCursor::Start, QTextCursor::MoveAnchor);
+        m_tc.movePosition(QTextCursor::Start, QTextCursor::MoveAnchor);
     } else if (exactMatch(Qt::ALT + Qt::SHIFT + Qt::Key_Greater, keySequence)) {
-      m_tc.movePosition(QTextCursor::End, QTextCursor::MoveAnchor);
+        m_tc.movePosition(QTextCursor::End, QTextCursor::MoveAnchor);
     } else if (exactMatch(Qt::CTRL + Qt::Key_V, keySequence)) {
-      moveDown(count() * (linesOnScreen() - 2) - cursorLineOnScreen());
-      scrollToLineInDocument(cursorLineInDocument());
+        moveDown(count() * (linesOnScreen() - 2) - cursorLineOnScreen());
+        scrollToLineInDocument(cursorLineInDocument());
     } else if (exactMatch(Qt::ALT + Qt::Key_V, keySequence)) {
-      moveUp(count() * (linesOnScreen() - 2) + cursorLineOnScreen());
-      scrollToLineInDocument(cursorLineInDocument() + linesOnScreen() - 2);
+        moveUp(count() * (linesOnScreen() - 2) + cursorLineOnScreen());
+        scrollToLineInDocument(cursorLineInDocument() + linesOnScreen() - 2);
+    } else if (exactMatch(Qt::CTRL + Qt::Key_Space, keySequence)) {
+        setMark();
     } else {
       result = EventUnhandled;
     }

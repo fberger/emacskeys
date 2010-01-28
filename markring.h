@@ -5,11 +5,13 @@
 
 #include "mark.h"
 
+
+
 class MarkRing
 {
 public:
   MarkRing();
-  void addMark(unsigned int line, unsigned int column);
+  void addMark(int position);
   Mark getPreviousMark();
   Mark getMostRecentMark();
   

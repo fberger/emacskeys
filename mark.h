@@ -3,8 +3,8 @@
 
 struct Mark 
 {
-  Mark(unsigned int line, unsigned int column)
-    : line(line), column(column), valid(true)
+  Mark(int position)
+    : valid(true), position(position)
   {
   }
   Mark()
@@ -13,15 +13,14 @@ struct Mark
   }
   bool operator ==(const Mark& mark)
   {
-    return valid == mark.valid && line == mark.line && column == mark.column;
+    return valid == mark.valid && position == mark.position;
   }
   bool operator !=(const Mark& mark)
   {
     return !(*this == mark);
   }
-  unsigned int line;
-  unsigned int column;
   bool valid;
+  int position;
 };
 
 #endif
