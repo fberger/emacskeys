@@ -55,12 +55,14 @@
 #include <QtCore/QObject>
 #include <QtCore/QPoint>
 #include <QtCore/QSettings>
+#include <QtCore/QHash>
 
 #include <QtGui/QMessageBox>
 #include <QtGui/QPlainTextEdit>
 #include <QtGui/QTextBlock>
 #include <QtGui/QTextCursor>
 #include <QtGui/QTextEdit>
+#include <QtGui/QMainWindow>
 
 
 using namespace EmacsKeys::Internal;
@@ -74,7 +76,7 @@ namespace Constants {
 
 const char * const INSTALL_HANDLER        = "TextEditor.EmacsKeysHandler";
 const char * const MINI_BUFFER            = "TextEditor.EmacsKeysMiniBuffer";
-const char * const INSTALL_KEY            = "Alt+V,Alt+V";
+const char * const INSTALL_KEY            = "Alt+M";
 
 } // namespace Constants
 } // namespace EmacsKeys
@@ -275,13 +277,14 @@ bool EmacsKeysPluginPrivate::initialize()
     Core::ActionManager *actionManager = Core::ICore::instance()->actionManager();
     QTC_ASSERT(actionManager, return false);
 
-    QList<int> globalcontext;
-    globalcontext << Core::Constants::C_GLOBAL_ID;
+
 
     m_emacsKeysOptionsPage = new EmacsKeysOptionPage;
     q->addObject(m_emacsKeysOptionsPage);
     theEmacsKeysSettings()->readSettings(Core::ICore::instance()->settings());
     
+    QList<int> globalcontext;
+    globalcontext << Core::Constants::C_GLOBAL_ID;
     Core::Command *cmd = 0;
     cmd = actionManager->registerAction(theEmacsKeysSetting(ConfigUseEmacsKeys),
         Constants::INSTALL_HANDLER, globalcontext);
@@ -290,6 +293,36 @@ bool EmacsKeysPluginPrivate::initialize()
     ActionContainer *advancedMenu =
         actionManager->actionContainer(Core::Constants::M_EDIT_ADVANCED);
     advancedMenu->addAction(cmd, Core::Constants::G_EDIT_EDITOR);
+
+    ActionContainer* actionContainer = actionManager->actionContainer(Core::Constants::M_FILE);
+    QMenu* menu = actionContainer->menu();
+    menu->setTitle("F&ile");
+
+    actionContainer = actionManager->actionContainer(Core::Constants::M_EDIT);
+    menu = actionContainer->menu();
+    menu->setTitle("Edit");
+
+    QHash<QString, QString> replacements;
+    replacements["&Build"] = "B&uild";
+    replacements["&Debug"] = "Debu&g";
+    replacements["&Tools"] = "T&ools";
+    replacements["&Window"] = "Wi&ndow";
+
+    actionContainer = actionManager->actionContainer(Core::Constants::MENU_BAR);
+    qDebug() << menu->parentWidget()->metaObject()->className() << endl;
+    QMainWindow* mainWindow = qobject_cast<QMainWindow*>(menu->parentWidget());
+    QMenuBar* menuBar = mainWindow->menuBar();
+    if (!menuBar) {
+        qDebug() << "no menu bar" << endl;
+    }
+    foreach(QObject* child, mainWindow->children()) {
+        qDebug() << child->metaObject()->className() << endl;
+        if (QMenu* menuChild = qobject_cast<QMenu*>(child)) {
+            if (replacements.contains(menuChild->title())) {
+                menuChild->setTitle(replacements[menuChild->title()]);
+            }
+        }
+    }
 
     // EditorManager
     QObject *editorManager = Core::ICore::instance()->editorManager();

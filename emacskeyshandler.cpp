@@ -21,7 +21,7 @@
 //
 // 1 Please do not add any direct dependencies to other Qt Creator code here.
 //   Instead emit signals and let the EmacsKeysPlugin channel the information to
-//   Qt Creator. The idea is to keep this file here in a "clean" state that
+//   Qt Creator. The idea is to keep this keyfile here in a "clean" state that
 //   allows easy reuse with any QTextEdit or QPlainTextEdit derived class.
 //
 // 2 There are a few auto tests located in ../../../tests/auto/emacsKeys.
@@ -728,9 +728,9 @@ EventResult EmacsKeysHandler::Private::handleEvent(QKeyEvent *ev)
 
     EventResult result = EventHandled;
     if (exactMatch(Qt::CTRL + Qt::Key_N, keySequence)) {
-        moveDown();
+        m_tc.movePosition(QTextCursor::Down, QTextCursor::MoveAnchor);
     } else if (exactMatch(Qt::CTRL + Qt::Key_P, keySequence)) {
-        moveUp();
+        m_tc.movePosition(QTextCursor::Up, QTextCursor::MoveAnchor);
     } else if (exactMatch(Qt::CTRL + Qt::Key_A, keySequence)) {
         moveToStartOfLine();
     } else if (exactMatch(Qt::CTRL + Qt::Key_E, keySequence)) {
@@ -749,8 +749,14 @@ EventResult EmacsKeysHandler::Private::handleEvent(QKeyEvent *ev)
       m_tc.movePosition(QTextCursor::Start, QTextCursor::MoveAnchor);
     } else if (exactMatch(Qt::ALT + Qt::SHIFT + Qt::Key_Greater, keySequence)) {
       m_tc.movePosition(QTextCursor::End, QTextCursor::MoveAnchor);
+    } else if (exactMatch(Qt::CTRL + Qt::Key_V, keySequence)) {
+      moveDown(count() * (linesOnScreen() - 2) - cursorLineOnScreen());
+      scrollToLineInDocument(cursorLineInDocument());
+    } else if (exactMatch(Qt::ALT + Qt::Key_V, keySequence)) {
+      moveUp(count() * (linesOnScreen() - 2) + cursorLineOnScreen());
+      scrollToLineInDocument(cursorLineInDocument() + linesOnScreen() - 2);
     } else {
-        result = handleKey(key, um, ev->text());
+      result = EventUnhandled;
     }
 
     m_oldTc = m_tc;
