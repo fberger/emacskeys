@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QStringList>
 
-class QTextEdit;
+class QWidget;
 
 class KillRing : public QObject
 {
@@ -12,8 +12,8 @@ class KillRing : public QObject
 
 public:
   KillRing();
-  void setCurrentYankView(QTextEdit* view);
-  QTextEdit* currentYankView() const;
+  void setCurrentYankView(QWidget* view);
+  QWidget* currentYankView() const;
   void add(const QString& text);
   QString next();
   void ignoreNextClipboardChange();
@@ -24,7 +24,7 @@ private slots:
 
 private:
   QStringList ring;
-  QTextEdit* currentView;
+  QWidget* currentView;
   QStringList::ConstIterator iter;
   bool ignore;
 };

@@ -58,12 +58,12 @@ QString KillRing::next()
   return *iter;
 }
 
-void KillRing::setCurrentYankView(QTextEdit* view)
+void KillRing::setCurrentYankView(QWidget* view)
 {
   currentView = view;
 }
 
-QTextEdit* KillRing::currentYankView() const
+QWidget* KillRing::currentYankView() const
 {
   return currentView;
 }

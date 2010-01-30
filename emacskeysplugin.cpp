@@ -325,6 +325,9 @@ bool EmacsKeysPluginPrivate::initialize()
     command = actionManager->command(TextEditor::Constants::COMPLETE_THIS);
     command->setKeySequence(QKeySequence("Alt+/"));
 
+    command = actionManager->command("QtCreator.Sidebar.File System");
+    command->setKeySequence(QKeySequence("Ctrl+X,Ctrl+B"));
+
     // EditorManager
     QObject *editorManager = Core::ICore::instance()->editorManager();
     connect(editorManager, SIGNAL(editorAboutToClose(Core::IEditor*)),

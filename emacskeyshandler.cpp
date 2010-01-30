@@ -104,6 +104,7 @@ namespace Internal {
 #define StartOfDocument QTextCursor::Start
 
 #define EDITOR(s) (m_textedit ? m_textedit->s : m_plaintextedit->s)
+#define EDITOR_WIDGET m_textedit ? qobject_cast<QWidget*>(m_textedit) : qobject_cast<QWidget*>(m_plaintextedit)
 
 const int ParagraphSeparator = 0x00002029;
 
@@ -219,15 +220,13 @@ public:
     void highlightMatches(const QString &needle);
 
 
-  void yankPop(QTextEdit* view);
+  void yankPop(QWidget* view);
   void setMark();
-  /*
   void exchangeDotAndMark();
   void popToMark();
   void copy();
   void cut();
   void yank();
-  */
   void killLine();
   /*
   void charactersInserted(int line, int column, const QString& text);
@@ -409,6 +408,7 @@ public:
     QList<QTextEdit::ExtraSelection> m_searchSelections;
 
     int yankEndPosition;
+    int yankStartPosition;
 };
 
 QStringList EmacsKeysHandler::Private::m_searchHistory;
@@ -456,7 +456,7 @@ bool EmacsKeysHandler::Private::wantsOverride(QKeyEvent *ev)
     }
 
     // We are interested in overriding  most Ctrl key combinations
-    if (mods == Qt::ControlModifier && key >= Key_A && key <= Key_Z && key != Key_X && key != Key_R) {
+    if (mods == Qt::ControlModifier && key >= Key_A && key <= Key_Z && key != Key_X && key != Key_R && key != Key_S) {
         // Ctrl-K is special as it is the Core's default notion of QuickOpen
         KEY_DEBUG(" NOT PASSING CTRL KEY");
         //updateMiniBuffer();
@@ -473,7 +473,7 @@ bool EmacsKeysHandler::Private::exactMatch(int key, const QKeySequence& keySeque
 }
 
 
-void EmacsKeysHandler::Private::yankPop(QTextEdit* view)
+void EmacsKeysHandler::Private::yankPop(QWidget* view)
 {
   qDebug() << "yankPop called " << endl;
   if (KillRing::instance()->currentYankView() != view) {
@@ -493,14 +493,16 @@ void EmacsKeysHandler::Private::yankPop(QTextEdit* view)
 
   QString next(KillRing::instance()->next());
   if (!next.isEmpty()) {
+    qDebug() << "yanking " << next << endl;
     beginEditBlock();
-    m_tc.setPosition(yankEndPosition, QTextCursor::KeepAnchor);
+    m_tc.setPosition(yankStartPosition, QTextCursor::KeepAnchor);
     m_tc.removeSelectedText();
     m_tc.insertText(next);
     yankEndPosition = m_tc.position();
     endEditBlock();
   }
   else {
+    qDebug() << "killring empty" << endl;
     QApplication::beep();
   }
 }
@@ -513,22 +515,20 @@ void EmacsKeysHandler::Private::setMark()
   markRing.addMark(m_tc.position());
 }
 
-/*
+
 void EmacsKeysHandler::Private::exchangeDotAndMark()
 {
-  unsigned int line, column;
-  KTextEditor::viewCursorInterface(view)->cursorPositionReal(&line, &column);
-  ring.addMark(line, column);
+  int position = m_tc.position();
+  markRing.addMark(position);
   popToMark();
 }
 
 void EmacsKeysHandler::Private::popToMark()
 {
   qDebug() << "pop mark" << endl;
-  Mark mark(ring.getPreviousMark());
+  Mark mark(markRing.getPreviousMark());
   if (mark.valid) {
-    KTextEditor::viewCursorInterface(view)->setCursorPositionReal(mark.line,
-								  mark.column);
+    m_tc.setPosition(mark.position);
   }
   else {
     QApplication::beep();
@@ -538,16 +538,13 @@ void EmacsKeysHandler::Private::popToMark()
 void EmacsKeysHandler::Private::copy()
 {
   qDebug() << "emacs copy" << endl;
-  Mark mark(ring.getMostRecentMark());
+  Mark mark(markRing.getMostRecentMark());
   if (mark.valid) {
-    unsigned int line, column;
-    KTextEditor::viewCursorInterface(view)->cursorPositionReal(&line, &column);
-    KTextEditor::selectionInterface(view->document())->setSelection
-      (mark.line, mark.column, line, column);
-    KTextEditor::clipboardInterface(view)->copy();
-    KTextEditor::selectionInterface(view->document())->clearSelection();
-    KTextEditor::viewStatusMsgInterface(view)->viewStatusMsg
-      (KStringHandler::csqueeze(QApplication::clipboard()->text(), 60));
+    beginEditBlock();
+    m_tc.setPosition(mark.position, QTextCursor::KeepAnchor);
+    QApplication::clipboard()->setText(m_tc.selectedText());
+    m_tc.clearSelection();
+    endEditBlock();
   }
   else {
     QApplication::beep();
@@ -557,13 +554,13 @@ void EmacsKeysHandler::Private::copy()
 void EmacsKeysHandler::Private::cut()
 {
   qDebug() << "emacs cut" << endl;
-  Mark mark(ring.getMostRecentMark());
+  Mark mark(markRing.getMostRecentMark());
   if (mark.valid) {
-    unsigned int line, column;
-    KTextEditor::viewCursorInterface(view)->cursorPositionReal(&line, &column);
-    KTextEditor::selectionInterface(view->document())->setSelection
-      (mark.line, mark.column, line, column);
-    KTextEditor::clipboardInterface(view)->cut();
+    beginEditBlock();
+    m_tc.setPosition(mark.position, QTextCursor::KeepAnchor);
+    QApplication::clipboard()->setText(m_tc.selectedText());
+    m_tc.removeSelectedText();
+    endEditBlock();
   }
   else {
     QApplication::beep();
@@ -573,19 +570,15 @@ void EmacsKeysHandler::Private::cut()
 void EmacsKeysHandler::Private::yank()
 {
   qDebug() << "emacs yank" << endl;
-  unsigned l, c;
-  KTextEditor::viewCursorInterface(view)->cursorPositionReal(&l, &c);
-  startLine = (unsigned int)l;
-  startColumn = (unsigned int)c;
-  KTextEditor::clipboardInterface(view)->paste();
-  KTextEditor::viewCursorInterface(view)->cursorPositionReal(&endLine,
-							     &endColumn);
-  if (l != endLine || c != endColumn) {
-    KillRing::instance()->setCurrentYankView(view);
+  int position = m_tc.position();
+  yankStartPosition = position;
+  EDITOR(paste());
+  yankEndPosition = m_tc.position();
+  if (position != yankEndPosition) {
+    KillRing::instance()->setCurrentYankView(EDITOR_WIDGET);
   }
 }
 
-*/
 void EmacsKeysHandler::Private::killLine()
 {
   qDebug() << "kill line" << endl;
@@ -688,6 +681,18 @@ EventResult EmacsKeysHandler::Private::handleEvent(QKeyEvent *ev)
         setMark();
     } else if (exactMatch(Qt::CTRL + Qt::Key_K, keySequence)) {
         killLine();
+    } else if (exactMatch(Qt::CTRL + Qt::Key_Y, keySequence)) {
+        yank();
+    } else if (exactMatch(Qt::ALT + Qt::Key_Y, keySequence)) {
+        yankPop(EDITOR_WIDGET);
+    } else if (exactMatch(Qt::CTRL + Qt::Key_W, keySequence)) {
+        cut();
+    } else if (exactMatch(Qt::ALT + Qt::Key_W, keySequence)) {
+        copy();
+    } else if (QKeySequence(Qt::CTRL + Qt::Key_U, Qt::CTRL + Qt::Key_Space).matches(keySequence) == QKeySequence::ExactMatch) {
+        popToMark();
+    } else if (QKeySequence(Qt::CTRL + Qt::Key_X, Qt::Key_X).matches(keySequence) == QKeySequence::ExactMatch) {
+        exchangeDotAndMark();
     } else {
       result = EventUnhandled;
     }
