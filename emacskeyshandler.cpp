@@ -228,6 +228,8 @@ public:
   void cut();
   void yank();
   void killLine();
+  void killWord();
+  void backwardKillWord();
   /*
   void charactersInserted(int line, int column, const QString& text);
   */
@@ -541,9 +543,11 @@ void EmacsKeysHandler::Private::copy()
   Mark mark(markRing.getMostRecentMark());
   if (mark.valid) {
     beginEditBlock();
+    int position = m_tc.position();
     m_tc.setPosition(mark.position, QTextCursor::KeepAnchor);
     QApplication::clipboard()->setText(m_tc.selectedText());
     m_tc.clearSelection();
+    m_tc.setPosition(position);
     endEditBlock();
   }
   else {
@@ -598,6 +602,39 @@ void EmacsKeysHandler::Private::killLine()
   endEditBlock();
 }
 
+void EmacsKeysHandler::Private::killWord()
+{
+  qDebug() << "kill word" << endl;
+  int position = m_tc.position();
+  qDebug() << "current position " << position << endl;
+  beginEditBlock();
+  m_tc.movePosition(QTextCursor::NextWord, QTextCursor::KeepAnchor);
+  if (position != m_tc.position()) {
+      qDebug() << "invoke cut" << endl;
+      QApplication::clipboard()->setText(m_tc.selectedText());
+      m_tc.removeSelectedText();
+  } else {
+      QApplication::beep();
+  }
+  endEditBlock();
+}
+
+void EmacsKeysHandler::Private::backwardKillWord()
+{
+  qDebug() << "backwards kill word" << endl;
+  int position = m_tc.position();
+  qDebug() << "current position " << position << endl;
+  beginEditBlock();
+  m_tc.movePosition(QTextCursor::PreviousWord, QTextCursor::KeepAnchor);
+  if (position != m_tc.position()) {
+      qDebug() << "invoke cut" << endl;
+      QApplication::clipboard()->setText(m_tc.selectedText());
+      m_tc.removeSelectedText();
+  } else {
+      QApplication::beep();
+  }
+  endEditBlock();
+}
 /*
 
 void EmacsKeysHandler::Private::charactersInserted(int l, int c, const QString& text)
@@ -665,6 +702,10 @@ EventResult EmacsKeysHandler::Private::handleEvent(QKeyEvent *ev)
         moveToWordBoundary(false, false);
     } else if (exactMatch(Qt::ALT + Qt::Key_F, keySequence)) {
         moveToNextWord(false);
+    } else if (exactMatch(Qt::ALT + Qt::Key_D, keySequence)) {
+        killWord();
+    } else if (exactMatch(Qt::ALT + Qt::Key_Backspace, keySequence)) {
+        backwardKillWord();
     } else if (exactMatch(Qt::CTRL + Qt::Key_D, keySequence)) {
         m_tc.deleteChar();
     } else if (exactMatch(Qt::ALT + Qt::SHIFT + Qt::Key_Less, keySequence)) {

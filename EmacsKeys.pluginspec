@@ -1,6 +1,7 @@
 <plugin name="EmacsKeys" version="1.2.1" compatVersion="1.2.1">
-    <vendor>Nokia Corporation</vendor>
+    <vendor>Felix Berger</vendor>
     <copyright>(C) 2008-2009 Nokia Corporation</copyright>
+    <copyright>(C) 2010 Felix Berger</copyright>
     <license>
 Commercial Usage
 
@@ -16,7 +17,7 @@ General Public License version 2.1 as published by the Free Software
 Foundation.  Please review the following information to
 ensure the GNU Lesser General Public License version 2.1 requirements
 will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.</license>
-    <description>VI-style keyboard navigation.</description>
+    <description>Emacs Keys</description>
     <url>http://www.qtsoftware.com</url>
     <dependencyList>
         <dependency name="CppEditor" version="1.2.1"/><!-- Plugin adds items to the editor's context menu -->
