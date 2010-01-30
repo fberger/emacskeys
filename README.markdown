@@ -30,11 +30,11 @@ M-w, C-k, M-d and M-Backspace.
 * Mnemonics are removed from some of the menus to allow conflicting Emacs keys
   to work.
 
-Build instructions
+Build Instructions
 ==================
 
 * Download the source of Qt Creator version 1.2.1 (other versions might work too).
-* cd into src/plugins/
+* cd src/plugins/
 * git clone git://github.com/fberger/emacskeys.git
 * patch -p 3 < emacskeys/plugins.pro.patch
 * cd ../../
