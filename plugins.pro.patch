@@ -1,0 +1,24 @@
+diff --git a/src/plugins/plugins.pro b/src/plugins/plugins.pro
+index 4437f0f..2e51c3b 100644
+--- a/src/plugins/plugins.pro
++++ b/src/plugins/plugins.pro
+@@ -27,6 +27,7 @@ SUBDIRS   = plugin_coreplugin \
+             plugin_cpaster \
+             plugin_cmakeprojectmanager \
+             plugin_fakevim \
++	    plugin_emacskeys \
+             plugin_designer \
+             plugin_resourceeditor \
+ 	    plugin_genericprojectmanager \
+@@ -135,6 +136,11 @@ plugin_fakevim.depends = plugin_projectexplorer
+ plugin_fakevim.depends += plugin_coreplugin
+ plugin_fakevim.depends += plugin_cppeditor
+ 
++plugin_emacskeys.subdir = emacskeys
++plugin_emacskeys.depends = plugin_projectexplorer
++plugin_emacskeys.depends += plugin_coreplugin
++plugin_emacskeys.depends += plugin_cppeditor
++
+ plugin_qtestlib.subdir = qtestlib
+ plugin_qtestlib.depends = plugin_projectexplorer
+ plugin_qtestlib.depends += plugin_coreplugin
