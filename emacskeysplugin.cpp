@@ -76,7 +76,6 @@ namespace Constants {
 
 const char * const INSTALL_HANDLER        = "TextEditor.EmacsKeysHandler";
 const char * const MINI_BUFFER            = "TextEditor.EmacsKeysMiniBuffer";
-const char * const INSTALL_KEY            = "Alt+M";
 
 } // namespace Constants
 } // namespace EmacsKeys
@@ -288,7 +287,6 @@ bool EmacsKeysPluginPrivate::initialize()
     Core::Command *cmd = 0;
     cmd = actionManager->registerAction(theEmacsKeysSetting(ConfigUseEmacsKeys),
         Constants::INSTALL_HANDLER, globalcontext);
-    cmd->setDefaultKeySequence(QKeySequence(Constants::INSTALL_KEY));
 
     ActionContainer *advancedMenu =
         actionManager->actionContainer(Core::Constants::M_EDIT_ADVANCED);
