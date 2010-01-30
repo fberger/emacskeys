@@ -652,7 +652,6 @@ void EmacsKeysHandler::Private::charactersInserted(int l, int c, const QString& 
 EventResult EmacsKeysHandler::Private::handleEvent(QKeyEvent *ev)
 {
     int key = ev->key();
-    const int um = key; // keep unmodified key around
     const int mods = ev->modifiers();
     QKeySequence keySequence(ev->key() + ev->modifiers());
 
