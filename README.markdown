@@ -1,6 +1,9 @@
 EmacsKeys
 =========
 
+EmacsKeys is a plugin for Qt Creator that brings Emacs key bindings and
+functionality to the Qt Creator IDE.
+
 Features
 ========
 
