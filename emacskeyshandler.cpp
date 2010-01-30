@@ -62,8 +62,10 @@
 #include <QtGui/QTextCursor>
 #include <QtGui/QTextDocumentFragment>
 #include <QtGui/QTextEdit>
+#include <QtGui/QClipboard>
 
 #include "markring.h"
+#include "killring.h"
 
 #define DEBUG_KEY  1
 #if DEBUG_KEY
@@ -216,9 +218,8 @@ public:
     void search(const QString &needle, bool forward);
     void highlightMatches(const QString &needle);
 
-  /*
+
   void yankPop(QTextEdit* view);
-  */
   void setMark();
   /*
   void exchangeDotAndMark();
@@ -226,12 +227,9 @@ public:
   void copy();
   void cut();
   void yank();
+  */
   void killLine();
-  void nextLine();
-  void previousLine();
-  void forwardChar();
-  void backwardChar();
-  void deleteNextChar();
+  /*
   void charactersInserted(int line, int column, const QString& text);
   */
 
@@ -409,6 +407,8 @@ public:
     QList<int> m_jumpListRedo;
 
     QList<QTextEdit::ExtraSelection> m_searchSelections;
+
+    int yankEndPosition;
 };
 
 QStringList EmacsKeysHandler::Private::m_searchHistory;
@@ -456,7 +456,7 @@ bool EmacsKeysHandler::Private::wantsOverride(QKeyEvent *ev)
     }
 
     // We are interested in overriding  most Ctrl key combinations
-    if (mods == Qt::ControlModifier && key >= Key_A && key <= Key_Z && key != Key_X) {
+    if (mods == Qt::ControlModifier && key >= Key_A && key <= Key_Z && key != Key_X && key != Key_R) {
         // Ctrl-K is special as it is the Core's default notion of QuickOpen
         KEY_DEBUG(" NOT PASSING CTRL KEY");
         //updateMiniBuffer();
@@ -472,7 +472,7 @@ bool EmacsKeysHandler::Private::exactMatch(int key, const QKeySequence& keySeque
     return QKeySequence(key).matches(keySequence) == QKeySequence::ExactMatch;
 }
 
-/*
+
 void EmacsKeysHandler::Private::yankPop(QTextEdit* view)
 {
   qDebug() << "yankPop called " << endl;
@@ -483,36 +483,33 @@ void EmacsKeysHandler::Private::yankPop(QTextEdit* view)
     return;
   }
 
-  unsigned int l, c;
-  KTextEditor::viewCursorInterface(view)->cursorPositionReal(&l, &c);
-  if (l != endLine || c != endColumn) {
+  int position = m_tc.position();
+  if (position != yankEndPosition) {
     qDebug() << "Cursor has been moved in the meantime" << endl;
-    qDebug() << "lines " << endLine << " " << l << endl;
-    qDebug() << "columns " << endColumn << " " << c << endl;
+    qDebug() << "yank end position " << yankEndPosition << endl;
     QApplication::beep();
     return;
   }
 
   QString next(KillRing::instance()->next());
   if (!next.isEmpty()) {
-    KTextEditor::EditInterface* editor = 
-      KTextEditor::editInterface(view->document());
-    KTextEditor::editInterfaceExt(view->document())->editBegin();
-    editor->removeText(startLine, startColumn, endLine, endColumn);
-    editor->insertText(startLine, startColumn, next);
-    KTextEditor::viewCursorInterface(view)->cursorPositionReal(&endLine, 
-							       &endColumn);
-    KTextEditor::editInterfaceExt(view->document())->editEnd();
+    beginEditBlock();
+    m_tc.setPosition(yankEndPosition, QTextCursor::KeepAnchor);
+    m_tc.removeSelectedText();
+    m_tc.insertText(next);
+    yankEndPosition = m_tc.position();
+    endEditBlock();
   }
   else {
     QApplication::beep();
   }
 }
 
-*/
+
 
 void EmacsKeysHandler::Private::setMark()
 {
+  qDebug() << "set mark" << endl;
   markRing.addMark(m_tc.position());
 }
 
@@ -588,99 +585,27 @@ void EmacsKeysHandler::Private::yank()
   }
 }
 
+*/
 void EmacsKeysHandler::Private::killLine()
 {
-  unsigned int line, column;
-  KTextEditor::viewCursorInterface(view)->cursorPositionReal(&line, &column);
-  int length = KTextEditor::editInterface(view->document())->lineLength(line);
-
-  // remove line break
-  if (column == (unsigned int)length) {
-    KTextEditor::editInterface(view->document())->removeText(line, column, 
-							     line + 1, 0);
-    return;
+  qDebug() << "kill line" << endl;
+  beginEditBlock();
+  int position = m_tc.position();
+  qDebug() << "current position " << position << endl;
+  m_tc.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
+  if (position == m_tc.position()) {
+      qDebug() << "at line end" << endl;
+      // at the end of the line, just delete new line character
+      m_tc.deleteChar();
+  } else {
+      qDebug() << "invoke cut" << endl;
+      QApplication::clipboard()->setText(m_tc.selectedText());
+      m_tc.removeSelectedText();
   }
-  
-  KTextEditor::selectionInterface(view->document())->setSelection
-    (line, column, line, length);
-  KTextEditor::clipboardInterface(view)->cut();
+  endEditBlock();
 }
 
-void EmacsKeysHandler::Private::nextLine()
-{
-  unsigned int line, column;
-  KTextEditor::viewCursorInterface(view)->cursorPositionReal(&line, &column);
-  unsigned int lines = KTextEditor::editInterface(view->document())->numLines();
-  if (++line < lines) {
-    KTextEditor::viewCursorInterface(view)->setCursorPositionReal(line, column);
-  }
-  else {
-    QApplication::beep();
-  }
-}
-
-void EmacsKeysHandler::Private::previousLine()
-{
-  unsigned int line, column;
-  KTextEditor::viewCursorInterface(view)->cursorPositionReal(&line, &column);
-  if (line > 0) {
-    KTextEditor::viewCursorInterface(view)->setCursorPositionReal(--line, 
-								  column);
-  }
-  else {
-    QApplication::beep();
-  }
-}
-
-void EmacsKeysHandler::Private::forwardChar()
-{
-  unsigned int line, column;
-  KTextEditor::viewCursorInterface(view)->cursorPositionReal(&line, &column);
-  int length = KTextEditor::editInterface(view->document())->lineLength(line);
-  if (column < (unsigned int)length) {
-    KTextEditor::viewCursorInterface(view)->setCursorPositionReal(line, 
-								  ++column);
-  }
-  else {
-    unsigned int lines =
-      KTextEditor::editInterface(view->document())->numLines();
-    if (++line < lines) {
-      KTextEditor::viewCursorInterface(view)->setCursorPositionReal(line, 0);
-    }
-    else {
-      QApplication::beep();
-    }
-  }
-}
-
-void EmacsKeysHandler::Private::backwardChar()
-{
-  unsigned int line, column;
-  KTextEditor::viewCursorInterface(view)->cursorPositionReal(&line, &column);
-  if (column > 0) {
-    KTextEditor::viewCursorInterface(view)->setCursorPositionReal(line, 
-								  --column);
-  }
-  else {
-    KTextEditor::viewCursorInterface(view)->setCursorPositionReal(line, 0);
-    previousLine();
-  }
-}
-
-void EmacsKeysHandler::Private::deleteNextChar()
-{
-  unsigned int line, column;
-  KTextEditor::viewCursorInterface(view)->cursorPositionReal(&line, &column);
-  int length = KTextEditor::editInterface(view->document())->lineLength(line);
-  if (column == (unsigned int)length) {
-    KTextEditor::editInterface(view->document())->removeText(line, column, 
-							     line + 1, 0);
-  }
-  else {
-    KTextEditor::editInterface(view->document())->removeText(line, column, line,
-							     column + 1);
-  }
-}
+/*
 
 void EmacsKeysHandler::Private::charactersInserted(int l, int c, const QString& text)
 {
@@ -761,6 +686,8 @@ EventResult EmacsKeysHandler::Private::handleEvent(QKeyEvent *ev)
         scrollToLineInDocument(cursorLineInDocument() + linesOnScreen() - 2);
     } else if (exactMatch(Qt::CTRL + Qt::Key_Space, keySequence)) {
         setMark();
+    } else if (exactMatch(Qt::CTRL + Qt::Key_K, keySequence)) {
+        killLine();
     } else {
       result = EventUnhandled;
     }
