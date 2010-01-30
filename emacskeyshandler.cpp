@@ -456,7 +456,7 @@ bool EmacsKeysHandler::Private::wantsOverride(QKeyEvent *ev)
     }
 
     // We are interested in overriding  most Ctrl key combinations
-    if (mods == Qt::ControlModifier && key >= Key_A && key <= Key_Z) {
+    if (mods == Qt::ControlModifier && key >= Key_A && key <= Key_Z && key != Key_X) {
         // Ctrl-K is special as it is the Core's default notion of QuickOpen
         KEY_DEBUG(" NOT PASSING CTRL KEY");
         //updateMiniBuffer();

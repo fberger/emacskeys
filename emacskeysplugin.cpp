@@ -303,10 +303,10 @@ bool EmacsKeysPluginPrivate::initialize()
     menu->setTitle("Edit");
 
     QHash<QString, QString> replacements;
-    replacements["&Build"] = "B&uild";
-    replacements["&Debug"] = "Debu&g";
-    replacements["&Tools"] = "T&ools";
-    replacements["&Window"] = "Wi&ndow";
+    replacements["&Build"] = "Build";
+    replacements["&Debug"] = "Debug";
+    replacements["&Tools"] = "Tools";
+    replacements["&Window"] = "Window";
 
     actionContainer = actionManager->actionContainer(Core::Constants::MENU_BAR);
     qDebug() << menu->parentWidget()->metaObject()->className() << endl;
@@ -318,6 +318,9 @@ bool EmacsKeysPluginPrivate::initialize()
             }
         }
     }
+
+    Command* command = actionManager->command("QtCreator.QuickOpen");
+    command->setKeySequence(QKeySequence("Ctrl+X,B"));
 
     // EditorManager
     QObject *editorManager = Core::ICore::instance()->editorManager();
