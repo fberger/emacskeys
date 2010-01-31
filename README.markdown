@@ -1,8 +1,8 @@
 EmacsKeys
 =========
 
-EmacsKeys is a plugin for Qt Creator that brings Emacs key bindings and
-functionality to the Qt Creator IDE.
+EmacsKeys is a plugin that brings Emacs key bindings and functionality to the
+Qt Creator IDE.
 
 Features
 ========
@@ -10,13 +10,13 @@ Features
 EmacsKeys provides the following features:
 
 * EmacsKeys.kms - A Keyboard Mapping Scheme for Qt Creator that can be
-imported in Options -> Environment -> Keyboard. It overrides some the standard
-key bindings used in Qt Creator and replaces them with Emacs ones. C-s, C-x,s,
-C-x,C-s, C-x,C-w.
+imported in Options -> Environment -> Keyboard. It overrides some of the
+standard key bindings used in Qt Creator and replaces them with Emacs
+ones: C-s, C-x,s, C-x,C-s, C-x,C-w.
 
 * Kill ring - the Emacs kill ring allows you to maintain a history of your
-clipboards content. Caveat: It only works when text is inserted with C-W,
-M-w, C-k, M-d and M-Backspace.
+clipboards content. Caveat: It only works when text is inserted into it with
+C-W, M-w, C-k, M-d and M-Backspace.
 
 * The following keys work as expected: C-n, C-p, C-a, C-e, C-b, C-f, M-b, M-f,
   M-d, M-Backspace, C-d, M-<, M->, C-v, M-v, C-Space, C-k, C-y, M-y, C-w, M-w.
