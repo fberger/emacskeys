@@ -35,7 +35,7 @@
 #include <QtCore/QCoreApplication>
 #include <QtCore/QStack>
 
-using namespace Core::Utils;
+using namespace Utils;
 
 ///////////////////////////////////////////////////////////////////////
 //

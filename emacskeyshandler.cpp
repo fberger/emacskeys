@@ -81,7 +81,7 @@
 #   define UNDO_DEBUG(s)
 #endif
 
-using namespace Core::Utils;
+using namespace Utils;
 
 namespace EmacsKeys {
 namespace Internal {

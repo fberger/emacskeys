@@ -116,7 +116,7 @@ private:
     friend class DebuggerPlugin;
     Ui::EmacsKeysOptionPage m_ui;
 
-    Core::Utils::SavedActionSet m_group;
+    Utils::SavedActionSet m_group;
 };
 
 QWidget *EmacsKeysOptionPage::createPage(QWidget *parent)
@@ -317,7 +317,7 @@ bool EmacsKeysPluginPrivate::initialize()
         }
     }
 
-    Command* command = actionManager->command("QtCreator.QuickOpen");
+    Command* command = actionManager->command("QtCreator.Locate");
     command->setKeySequence(QKeySequence("Ctrl+X,B"));
 
     command = actionManager->command(TextEditor::Constants::COMPLETE_THIS);

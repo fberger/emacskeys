@@ -53,24 +53,24 @@ class EmacsKeysSettings : public QObject
 public:
     EmacsKeysSettings();
     ~EmacsKeysSettings();
-    void insertItem(int code, Core::Utils::SavedAction *item,
+    void insertItem(int code, Utils::SavedAction *item,
         const QString &longname = QString(),
         const QString &shortname = QString());
 
-    Core::Utils::SavedAction *item(int code);
-    Core::Utils::SavedAction *item(const QString &name);
+    Utils::SavedAction *item(int code);
+    Utils::SavedAction *item(const QString &name);
 
     void readSettings(QSettings *settings);
     void writeSettings(QSettings *settings);
 
 private:
-    QHash<int, Core::Utils::SavedAction *> m_items; 
+    QHash<int, Utils::SavedAction *> m_items;
     QHash<QString, int> m_nameToCode; 
     QHash<int, QString> m_codeToName; 
 };
 
 EmacsKeysSettings *theEmacsKeysSettings();
-Core::Utils::SavedAction *theEmacsKeysSetting(int code);
+Utils::SavedAction *theEmacsKeysSetting(int code);
 
 } // namespace Internal
 } // namespace EmacsKeys
