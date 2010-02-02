@@ -1,678 +1,723 @@
 <!DOCTYPE KeyboardMappingScheme>
 <mapping>
- <shortcut id="QtCreator.ReturnToEditor" >
-  <key value="Esc" />
+ <shortcut id="QtCreator.ReturnToEditor">
+  <key value="Esc"/>
  </shortcut>
- <shortcut id="QtCreator.New" >
-  <key value="Ctrl+N" />
+ <shortcut id="QtCreator.New">
+  <key value="Ctrl+N"/>
  </shortcut>
- <shortcut id="QtCreator.Open" >
-  <key value="Ctrl+O" />
+ <shortcut id="QtCreator.Open">
+  <key value="Ctrl+O"/>
  </shortcut>
- <shortcut id="QtCreator.OpenWith" >
-  <key value="" />
+ <shortcut id="QtCreator.OpenWith">
+  <key value=""/>
  </shortcut>
- <shortcut id="QtCreator.Save" >
-  <key value="Ctrl+X, Ctrl+S" />
+ <shortcut id="QtCreator.Save">
+  <key value="Ctrl+X, Ctrl+S"/>
  </shortcut>
- <shortcut id="QtCreator.SaveAs" >
-  <key value="Ctrl+X, Ctrl+W" />
+ <shortcut id="QtCreator.SaveAs">
+  <key value="Ctrl+X, Ctrl+W"/>
  </shortcut>
- <shortcut id="QtCreator.SaveAll" >
-  <key value="Ctrl+X, S" />
+ <shortcut id="QtCreator.SaveAll">
+  <key value="Ctrl+X, S"/>
  </shortcut>
- <shortcut id="QtCreator.Print" >
-  <key value="" />
+ <shortcut id="QtCreator.Print">
+  <key value=""/>
  </shortcut>
- <shortcut id="QtCreator.Exit" >
-  <key value="Ctrl+Q" />
+ <shortcut id="QtCreator.Exit">
+  <key value="Ctrl+Q"/>
  </shortcut>
- <shortcut id="QtCreator.Undo" >
-  <key value="Ctrl+Z" />
+ <shortcut id="QtCreator.Undo">
+  <key value="Ctrl+X, U"/>
  </shortcut>
- <shortcut id="QtCreator.Redo" >
-  <key value="Ctrl+Shift+Z" />
+ <shortcut id="QtCreator.Redo">
+  <key value="Ctrl+Shift+Z"/>
  </shortcut>
- <shortcut id="QtCreator.Cut" >
-  <key value="Ctrl+X" />
+ <shortcut id="QtCreator.Cut">
+  <key value="Ctrl+X"/>
  </shortcut>
- <shortcut id="QtCreator.Copy" >
-  <key value="Ctrl+C" />
+ <shortcut id="QtCreator.Copy">
+  <key value="Ctrl+C"/>
  </shortcut>
- <shortcut id="QtCreator.Paste" >
-  <key value="Ctrl+V" />
+ <shortcut id="QtCreator.Paste">
+  <key value="Ctrl+V"/>
  </shortcut>
- <shortcut id="QtCreator.SelectAll" >
-  <key value="Ctrl+A" />
+ <shortcut id="QtCreator.SelectAll">
+  <key value="Ctrl+A"/>
  </shortcut>
- <shortcut id="QtCreator.Goto" >
-  <key value="Ctrl+L" />
+ <shortcut id="QtCreator.Goto">
+  <key value="Ctrl+L"/>
  </shortcut>
- <shortcut id="QtCreator.Options" >
-  <key value="" />
+ <shortcut id="QtCreator.Options">
+  <key value=""/>
  </shortcut>
- <shortcut id="QtCreator.ToggleSidebar" >
-  <key value="Alt+0" />
+ <shortcut id="QtCreator.ToggleSidebar">
+  <key value="Alt+0"/>
  </shortcut>
- <shortcut id="QtCreator.ToggleFullScreen" >
-  <key value="Ctrl+Shift+F11" />
+ <shortcut id="QtCreator.ToggleFullScreen">
+  <key value="Ctrl+Shift+F11"/>
  </shortcut>
- <shortcut id="QtCreator.AboutQtCreator" >
-  <key value="" />
+ <shortcut id="QtCreator.AboutQtCreator">
+  <key value=""/>
  </shortcut>
- <shortcut id="QtCreator.AboutPlugins" >
-  <key value="" />
+ <shortcut id="QtCreator.AboutPlugins">
+  <key value=""/>
  </shortcut>
- <shortcut id="QtCreator.RevertToSaved" >
-  <key value="" />
+ <shortcut id="QtCreator.RevertToSaved">
+  <key value=""/>
  </shortcut>
- <shortcut id="QtCreator.Close" >
-  <key value="Ctrl+W" />
+ <shortcut id="QtCreator.Close">
+  <key value="Ctrl+W"/>
  </shortcut>
- <shortcut id="QtCreator.CloseAll" >
-  <key value="Ctrl+Shift+W" />
+ <shortcut id="QtCreator.CloseAll">
+  <key value="Ctrl+Shift+W"/>
  </shortcut>
- <shortcut id="QtCreator.CloseOthers" >
-  <key value="" />
+ <shortcut id="QtCreator.CloseOthers">
+  <key value=""/>
  </shortcut>
- <shortcut id="QtCreator.GotoPreviousInHistory" >
-  <key value="Ctrl+Tab" />
+ <shortcut id="QtCreator.GotoPreviousInHistory">
+  <key value="Ctrl+Tab"/>
  </shortcut>
- <shortcut id="QtCreator.GotoNextInHistory" >
-  <key value="Ctrl+Shift+Tab" />
+ <shortcut id="QtCreator.GotoNextInHistory">
+  <key value="Ctrl+Shift+Tab"/>
  </shortcut>
- <shortcut id="QtCreator.GoBack" >
-  <key value="Alt+Left" />
+ <shortcut id="QtCreator.GoBack">
+  <key value="Alt+Left"/>
  </shortcut>
- <shortcut id="QtCreator.GoForward" >
-  <key value="Alt+Right" />
+ <shortcut id="QtCreator.GoForward">
+  <key value="Alt+Right"/>
  </shortcut>
- <shortcut id="QtCreator.Split" >
-  <key value="Ctrl+E, 2" />
+ <shortcut id="QtCreator.Split">
+  <key value="Ctrl+E, 2"/>
  </shortcut>
- <shortcut id="QtCreator.SplitSideBySide" >
-  <key value="Ctrl+E, 3" />
+ <shortcut id="QtCreator.SplitSideBySide">
+  <key value="Ctrl+E, 3"/>
  </shortcut>
- <shortcut id="QtCreator.RemoveCurrentSplit" >
-  <key value="Ctrl+E, 0" />
+ <shortcut id="QtCreator.RemoveCurrentSplit">
+  <key value="Ctrl+E, 0"/>
  </shortcut>
- <shortcut id="QtCreator.RemoveAllSplits" >
-  <key value="Ctrl+E, 1" />
+ <shortcut id="QtCreator.RemoveAllSplits">
+  <key value="Ctrl+E, 1"/>
  </shortcut>
- <shortcut id="QtCreator.GotoOtherSplit" >
-  <key value="Ctrl+E, O" />
+ <shortcut id="QtCreator.GotoOtherSplit">
+  <key value="Ctrl+E, O"/>
  </shortcut>
- <shortcut id="QtCreator.OpenInExternalEditor" >
-  <key value="" />
+ <shortcut id="QtCreator.OpenInExternalEditor">
+  <key value=""/>
  </shortcut>
- <shortcut id="QtCreator.Mode.Output" >
-  <key value="Ctrl+6" />
+ <shortcut id="QtCreator.Mode.Output">
+  <key value="Ctrl+6"/>
  </shortcut>
- <shortcut id="QtCreator.Mode.Welcome" >
-  <key value="Ctrl+1" />
+ <shortcut id="QtCreator.Mode.Edit">
+  <key value="Ctrl+2"/>
  </shortcut>
- <shortcut id="QtCreator.Mode.Edit" >
-  <key value="Ctrl+2" />
+ <shortcut id="Find.Dialog">
+  <key value="Ctrl+Shift+F"/>
  </shortcut>
- <shortcut id="Find.Dialog" >
-  <key value="Ctrl+Shift+F" />
+ <shortcut id="Find.FindInCurrentDocument">
+  <key value="Ctrl+S"/>
  </shortcut>
- <shortcut id="Find.FindInCurrentDocument" >
-  <key value="Ctrl+S" />
+ <shortcut id="Find.FindNext">
+  <key value="F3"/>
  </shortcut>
- <shortcut id="Find.FindNext" >
-  <key value="F3" />
+ <shortcut id="Find.FindPrevious">
+  <key value="Shift+F3"/>
  </shortcut>
- <shortcut id="Find.FindPrevious" >
-  <key value="Shift+F3" />
+ <shortcut id="Find.ReplaceNext">
+  <key value="Ctrl+="/>
  </shortcut>
- <shortcut id="Find.ReplaceNext" >
-  <key value="Ctrl+=" />
+ <shortcut id="Find.ReplacePrevious">
+  <key value=""/>
  </shortcut>
- <shortcut id="Find.ReplacePrevious" >
-  <key value="" />
+ <shortcut id="Find.ReplaceAll">
+  <key value=""/>
  </shortcut>
- <shortcut id="Find.ReplaceAll" >
-  <key value="" />
+ <shortcut id="Find.CaseSensitive">
+  <key value=""/>
  </shortcut>
- <shortcut id="Find.CaseSensitive" >
-  <key value="" />
+ <shortcut id="Find.WholeWords">
+  <key value=""/>
  </shortcut>
- <shortcut id="Find.WholeWords" >
-  <key value="" />
+ <shortcut id="Find.RegularExpressions">
+  <key value=""/>
  </shortcut>
- <shortcut id="Find.RegularExpressions" >
-  <key value="" />
+ <shortcut id="QtCreator.Locate">
+  <key value="Ctrl+X, B"/>
  </shortcut>
- <shortcut id="QtCreator.QuickOpen" >
-  <key value="Ctrl+X, B" />
+ <shortcut id="TextEditor.CompleteThis">
+  <key value="Alt+/"/>
  </shortcut>
- <shortcut id="TextEditor.CompleteThis" >
-  <key value="Alt+/" />
+ <shortcut id="TextEditor.QuickFix">
+  <key value="Alt+Return"/>
  </shortcut>
- <shortcut id="QtCreator.Mode.Project" >
-  <key value="Ctrl+4" />
+ <shortcut id="QtCreator.Mode.Project">
+  <key value="Ctrl+4"/>
  </shortcut>
- <shortcut id="ProjectExplorer.Stop" >
-  <key value="Ctrl+Shift+R" />
+ <shortcut id="ProjectExplorer.Stop">
+  <key value="Ctrl+Shift+R"/>
  </shortcut>
- <shortcut id="ProjectExplorer.NewSession" >
-  <key value="" />
+ <shortcut id="ProjectExplorer.NewSession">
+  <key value=""/>
  </shortcut>
- <shortcut id="ProjectExplorer.NewProject" >
-  <key value="Ctrl+Shift+N" />
+ <shortcut id="ProjectExplorer.NewProject">
+  <key value="Ctrl+Shift+N"/>
  </shortcut>
- <shortcut id="ProjectExplorer.OpenFile" >
-  <key value="" />
+ <shortcut id="ProjectExplorer.OpenFile">
+  <key value=""/>
  </shortcut>
- <shortcut id="ProjectExplorer.Unload" >
-  <key value="" />
+ <shortcut id="ProjectExplorer.ShowInGraphicalShell">
+  <key value=""/>
  </shortcut>
- <shortcut id="ProjectExplorer.ClearSession" >
-  <key value="" />
+ <shortcut id="ProjectExplorer.Unload">
+  <key value=""/>
  </shortcut>
- <shortcut id="ProjectExplorer.BuildSession" >
-  <key value="Ctrl+Shift+B" />
+ <shortcut id="ProjectExplorer.ClearSession">
+  <key value=""/>
  </shortcut>
- <shortcut id="ProjectExplorer.RebuildSession" >
-  <key value="" />
+ <shortcut id="ProjectExplorer.BuildSession">
+  <key value="Ctrl+Shift+B"/>
  </shortcut>
- <shortcut id="ProjectExplorer.CleanSession" >
-  <key value="" />
+ <shortcut id="ProjectExplorer.RebuildSession">
+  <key value=""/>
  </shortcut>
- <shortcut id="ProjectExplorer.Build" >
-  <key value="Ctrl+B" />
+ <shortcut id="ProjectExplorer.CleanSession">
+  <key value=""/>
  </shortcut>
- <shortcut id="ProjectExplorer.Rebuild" >
-  <key value="" />
+ <shortcut id="ProjectExplorer.Build">
+  <key value="Ctrl+B"/>
  </shortcut>
- <shortcut id="ProjectExplorer.Clean" >
-  <key value="" />
+ <shortcut id="ProjectExplorer.Rebuild">
+  <key value=""/>
  </shortcut>
- <shortcut id="ProjectExplorer.BuildProjectOnly" >
-  <key value="" />
+ <shortcut id="ProjectExplorer.Clean">
+  <key value=""/>
  </shortcut>
- <shortcut id="ProjectExplorer.RebuildProjectOnly" >
-  <key value="" />
+ <shortcut id="ProjectExplorer.BuildProjectOnly">
+  <key value=""/>
  </shortcut>
- <shortcut id="ProjectExplorer.CleanProjectOnly" >
-  <key value="" />
+ <shortcut id="ProjectExplorer.RebuildProjectOnly">
+  <key value=""/>
  </shortcut>
- <shortcut id="ProjectExplorer.Run" >
-  <key value="Ctrl+R" />
+ <shortcut id="ProjectExplorer.CleanProjectOnly">
+  <key value=""/>
  </shortcut>
- <shortcut id="ProjectExplorer.RunContextMenu" >
-  <key value="" />
+ <shortcut id="ProjectExplorer.Run">
+  <key value="Ctrl+R"/>
  </shortcut>
- <shortcut id="ProjectExplorer.GoToTaskWindow" >
-  <key value="" />
+ <shortcut id="ProjectExplorer.RunContextMenu">
+  <key value=""/>
  </shortcut>
- <shortcut id="ProjectExplorer.CancelBuild" >
-  <key value="" />
+ <shortcut id="ProjectExplorer.CancelBuild">
+  <key value=""/>
  </shortcut>
- <shortcut id="ProjectExplorer.Debug" >
-  <key value="F5" />
+ <shortcut id="ProjectExplorer.Debug">
+  <key value="F5"/>
  </shortcut>
- <shortcut id="ProjectExplorer.AddNewFile" >
-  <key value="" />
+ <shortcut id="ProjectExplorer.AddNewFile">
+  <key value=""/>
  </shortcut>
- <shortcut id="ProjectExplorer.AddExistingFiles" >
-  <key value="" />
+ <shortcut id="ProjectExplorer.AddExistingFiles">
+  <key value=""/>
  </shortcut>
- <shortcut id="ProjectExplorer.RemoveFile" >
-  <key value="" />
+ <shortcut id="ProjectExplorer.RemoveFile">
+  <key value=""/>
  </shortcut>
- <shortcut id="ProjectExplorer.RenameFile" >
-  <key value="" />
+ <shortcut id="ProjectExplorer.RenameFile">
+  <key value=""/>
  </shortcut>
- <shortcut id="QtCreator.Sidebar.Projects" >
-  <key value="Alt+X" />
+ <shortcut id="QtCreator.Sidebar.Projects">
+  <key value="Alt+X"/>
  </shortcut>
- <shortcut id="QtCreator.Sidebar.File System" >
-  <key value="Alt+Y" />
+ <shortcut id="QtCreator.Sidebar.File System">
+  <key value=""/>
  </shortcut>
- <shortcut id="Bookmarks.Toggle" >
-  <key value="Ctrl+M" />
+ <shortcut id="Bookmarks.Toggle">
+  <key value="Ctrl+M"/>
  </shortcut>
- <shortcut id="Bookmarks.MoveUp" >
-  <key value="" />
+ <shortcut id="Bookmarks.MoveUp">
+  <key value=""/>
  </shortcut>
- <shortcut id="Bookmarks.MoveDown" >
-  <key value="" />
+ <shortcut id="Bookmarks.MoveDown">
+  <key value=""/>
  </shortcut>
- <shortcut id="Bookmarks.Previous" >
-  <key value="Ctrl+," />
+ <shortcut id="Bookmarks.Previous">
+  <key value="Ctrl+,"/>
  </shortcut>
- <shortcut id="Bookmarks.Next" >
-  <key value="Ctrl+." />
+ <shortcut id="Bookmarks.Next">
+  <key value="Ctrl+."/>
  </shortcut>
- <shortcut id="Bookmarks.PreviousDocument" >
-  <key value="" />
+ <shortcut id="Bookmarks.PreviousDocument">
+  <key value=""/>
  </shortcut>
- <shortcut id="Bookmarks.NextDocument" >
-  <key value="" />
+ <shortcut id="Bookmarks.NextDocument">
+  <key value=""/>
  </shortcut>
- <shortcut id="QtCreator.Sidebar.Bookmarks" >
-  <key value="Alt+M" />
+ <shortcut id="QtCreator.Sidebar.Bookmarks">
+  <key value="Alt+M"/>
  </shortcut>
- <shortcut id="CppTools.SwitchHeaderSource" >
-  <key value="F4" />
+ <shortcut id="CppTools.SwitchHeaderSource">
+  <key value="F4"/>
  </shortcut>
- <shortcut id="CppEditor.JumpToDefinition" >
-  <key value="F2" />
+ <shortcut id="CppEditor.JumpToDefinition">
+  <key value="F2"/>
  </shortcut>
- <shortcut id="CppEditor.SwitchDeclarationDefinition" >
-  <key value="Shift+F2" />
+ <shortcut id="CppEditor.SwitchDeclarationDefinition">
+  <key value="Shift+F2"/>
  </shortcut>
- <shortcut id="CodePaster.Post" >
-  <key value="Alt+C, Alt+P" />
+ <shortcut id="CppEditor.FindUsages">
+  <key value="Ctrl+Shift+U"/>
  </shortcut>
- <shortcut id="CodePaster.Fetch" >
-  <key value="Alt+C, Alt+F" />
+ <shortcut id="CppEditor.RenameSymbolUnderCursor">
+  <key value="Ctrl+Shift+R"/>
  </shortcut>
- <shortcut id="Debugger.StartExternal" >
-  <key value="" />
+ <shortcut id="CppEditor.UpdateCodeModel">
+  <key value=""/>
  </shortcut>
- <shortcut id="Debugger.AttachExternal" >
-  <key value="" />
+ <shortcut id="TextEditor.SelectEncoding">
+  <key value=""/>
  </shortcut>
- <shortcut id="Debugger.AttachCore" >
-  <key value="" />
+ <shortcut id="TextEditor.AutoIndentSelection">
+  <key value="Ctrl+I"/>
  </shortcut>
- <shortcut id="Debugger.AttachRemote" >
-  <key value="" />
+ <shortcut id="TextEditor.RewrapParagraph">
+  <key value="Ctrl+E, R"/>
  </shortcut>
- <shortcut id="Debugger.Detach" >
-  <key value="" />
+ <shortcut id="TextEditor.VisualizeWhitespace">
+  <key value="Ctrl+E, Ctrl+V"/>
  </shortcut>
- <shortcut id="Debugger.Interrupt" >
-  <key value="Shift+F5" />
+ <shortcut id="TextEditor.CleanWhitespace">
+  <key value=""/>
  </shortcut>
- <shortcut id="Debugger.Reset" >
-  <key value="Ctrl+Shift+F5" />
+ <shortcut id="TextEditor.TextWrapping">
+  <key value="Ctrl+E, Ctrl+W"/>
  </shortcut>
- <shortcut id="Debugger.NextLine" >
-  <key value="F10" />
+ <shortcut id="TextEditor.UnCommentSelection">
+  <key value="Ctrl+/"/>
  </shortcut>
- <shortcut id="Debugger.StepLine" >
-  <key value="F11" />
+ <shortcut id="TextEditor.CutLine">
+  <key value="Shift+Del"/>
  </shortcut>
- <shortcut id="Debugger.StepOut" >
-  <key value="Shift+F11" />
+ <shortcut id="TextEditor.DeleteLine">
+  <key value=""/>
  </shortcut>
- <shortcut id="Debugger.NextInstruction" >
-  <key value="" />
+ <shortcut id="TextEditor.Collapse">
+  <key value="Ctrl+&lt;"/>
  </shortcut>
- <shortcut id="Debugger.StepInstruction" >
-  <key value="" />
+ <shortcut id="TextEditor.Expand">
+  <key value="Ctrl+>"/>
  </shortcut>
- <shortcut id="Debugger.RunToLine" >
-  <key value="" />
+ <shortcut id="TextEditor.UnCollapseAll">
+  <key value=""/>
  </shortcut>
- <shortcut id="Debugger.RunToFunction" >
-  <key value="" />
+ <shortcut id="TextEditor.IncreaseFontSize">
+  <key value="Ctrl++"/>
  </shortcut>
- <shortcut id="Debugger.JumpToLine" >
-  <key value="" />
+ <shortcut id="TextEditor.DecreaseFontSize">
+  <key value="Ctrl+-"/>
  </shortcut>
- <shortcut id="Debugger.ToggleBreak" >
-  <key value="F9" />
+ <shortcut id="TextEditor.GotoBlockStart">
+  <key value="Ctrl+["/>
  </shortcut>
- <shortcut id="Debugger.AddToWatch" >
-  <key value="" />
+ <shortcut id="TextEditor.GotoBlockEnd">
+  <key value="Ctrl+]"/>
  </shortcut>
- <shortcut id="Debugger.Breakpoints" >
-  <key value="" />
+ <shortcut id="TextEditor.GotoBlockStartWithSelection">
+  <key value="Ctrl+{"/>
  </shortcut>
- <shortcut id="Debugger.Disassembler" >
-  <key value="" />
+ <shortcut id="TextEditor.GotoBlockEndWithSelection">
+  <key value="Ctrl+}"/>
  </shortcut>
- <shortcut id="Debugger.Modules" >
-  <key value="" />
+ <shortcut id="TextEditor.SelectBlockUp">
+  <key value="Ctrl+U"/>
  </shortcut>
- <shortcut id="Debugger.Registers" >
-  <key value="" />
+ <shortcut id="TextEditor.SelectBlockDown">
+  <key value="Ctrl+Shift+U"/>
  </shortcut>
- <shortcut id="Debugger.Debugger" >
-  <key value="" />
+ <shortcut id="TextEditor.MoveLineUp">
+  <key value="Ctrl+Shift+Up"/>
  </shortcut>
- <shortcut id="Debugger.Stack" >
-  <key value="" />
+ <shortcut id="TextEditor.MoveLineDown">
+  <key value="Ctrl+Shift+Down"/>
  </shortcut>
- <shortcut id="Debugger.Source Files" >
-  <key value="" />
+ <shortcut id="TextEditor.CopyLineUp">
+  <key value="Ctrl+Alt+Up"/>
  </shortcut>
- <shortcut id="Debugger.Thread" >
-  <key value="" />
+ <shortcut id="TextEditor.CopyLineDown">
+  <key value="Ctrl+Alt+Down"/>
  </shortcut>
- <shortcut id="Debugger.Locals and Watchers" >
-  <key value="" />
+ <shortcut id="CVS.Add">
+  <key value="Alt+C, Alt+A"/>
  </shortcut>
- <shortcut id="QtCreator.Mode.Debugger.Mode.Debug" >
-  <key value="Ctrl+3" />
+ <shortcut id="CVS.Delete">
+  <key value=""/>
  </shortcut>
- <shortcut id="TextEditor.EmacsKeysHandler" >
-  <key value="" />
+ <shortcut id="CVS.Revert">
+  <key value=""/>
  </shortcut>
- <shortcut id="TextEditor.FakeVimHandler" >
-  <key value="" />
+ <shortcut id="CVS.DiffAll">
+  <key value=""/>
  </shortcut>
- <shortcut id="Help.Home" >
-  <key value="" />
+ <shortcut id="CVS.DiffCurrent">
+  <key value="Alt+C, Alt+D"/>
  </shortcut>
- <shortcut id="Help.Previous" >
-  <key value="Alt+Left" />
+ <shortcut id="CVS.CommitAll">
+  <key value=""/>
  </shortcut>
- <shortcut id="Help.Next" >
-  <key value="Alt+Right" />
+ <shortcut id="CVS.CommitCurrent">
+  <key value="Alt+C, Alt+C"/>
  </shortcut>
- <shortcut id="Help.AddBookmark" >
-  <key value="Ctrl+M" />
+ <shortcut id="CVS.FilelogCurrent">
+  <key value=""/>
  </shortcut>
- <shortcut id="Help.Index" >
-  <key value="" />
+ <shortcut id="CVS.AnnotateCurrent">
+  <key value=""/>
  </shortcut>
- <shortcut id="Help.Contents" >
-  <key value="" />
+ <shortcut id="CVS.Status">
+  <key value=""/>
  </shortcut>
- <shortcut id="Help.Search" >
-  <key value="" />
+ <shortcut id="CVS.Update">
+  <key value=""/>
  </shortcut>
- <shortcut id="Help.Context" >
-  <key value="F1" />
+ <shortcut id="CVS.SubmitCurrentLog">
+  <key value=""/>
  </shortcut>
- <shortcut id="QtCreator.Mode.Help" >
-  <key value="Ctrl+5" />
+ <shortcut id="CVS.DiffSelectedFilesInLog">
+  <key value=""/>
  </shortcut>
- <shortcut id="Help.IndexShortcut" >
-  <key value="Ctrl+I" />
+ <shortcut id="CodePaster.Post">
+  <key value="Alt+C, Alt+P"/>
  </shortcut>
- <shortcut id="Help.ContentsShortcut" >
-  <key value="Ctrl+T" />
+ <shortcut id="CodePaster.Fetch">
+  <key value="Alt+C, Alt+F"/>
  </shortcut>
- <shortcut id="Help.SearchShortcut" >
-  <key value="Ctrl+S" />
+ <shortcut id="Debugger.StartExternal">
+  <key value=""/>
  </shortcut>
- <shortcut id="Perforce.Edit" >
-  <key value="Alt+P, Alt+E" />
+ <shortcut id="Debugger.AttachExternal">
+  <key value=""/>
  </shortcut>
- <shortcut id="Perforce.Add" >
-  <key value="Alt+P, Alt+A" />
+ <shortcut id="Debugger.AttachCore">
+  <key value=""/>
  </shortcut>
- <shortcut id="Perforce.Delete" >
-  <key value="" />
+ <shortcut id="Debugger.AttachRemote">
+  <key value=""/>
  </shortcut>
- <shortcut id="Perforce.Revert" >
-  <key value="Alt+P, Alt+R" />
+ <shortcut id="Debugger.Detach">
+  <key value=""/>
  </shortcut>
- <shortcut id="Perforce.DiffCurrent" >
-  <key value="" />
+ <shortcut id="Debugger.Interrupt">
+  <key value="Shift+F5"/>
  </shortcut>
- <shortcut id="Perforce.DiffProject" >
-  <key value="Alt+P, Alt+D" />
+ <shortcut id="Debugger.Reset">
+  <key value="Ctrl+Shift+F5"/>
  </shortcut>
- <shortcut id="Perforce.DiffAll" >
-  <key value="" />
+ <shortcut id="Debugger.NextLine">
+  <key value="F10"/>
  </shortcut>
- <shortcut id="Perforce.Opened" >
-  <key value="Alt+P, Alt+O" />
+ <shortcut id="Debugger.StepLine">
+  <key value="F11"/>
  </shortcut>
- <shortcut id="Perforce.Submit" >
-  <key value="Alt+P, Alt+S" />
+ <shortcut id="Debugger.StepOut">
+  <key value="Shift+F11"/>
  </shortcut>
- <shortcut id="Perforce.PendingChanges" >
-  <key value="" />
+ <shortcut id="Debugger.RunToLine">
+  <key value=""/>
  </shortcut>
- <shortcut id="Perforce.Describe" >
-  <key value="" />
+ <shortcut id="Debugger.RunToFunction">
+  <key value=""/>
  </shortcut>
- <shortcut id="Perforce.AnnotateCurrent" >
-  <key value="" />
+ <shortcut id="Debugger.JumpToLine">
+  <key value=""/>
  </shortcut>
- <shortcut id="Perforce.Annotate" >
-  <key value="" />
+ <shortcut id="Debugger.OperateByInstruction">
+  <key value=""/>
  </shortcut>
- <shortcut id="Perforce.FilelogCurrent" >
-  <key value="Alt+P, Alt+F" />
+ <shortcut id="Debugger.ToggleBreak">
+  <key value="F9"/>
  </shortcut>
- <shortcut id="Perforce.Filelog" >
-  <key value="" />
+ <shortcut id="Debugger.AddToWatch">
+  <key value=""/>
  </shortcut>
- <shortcut id="Perforce.SubmitCurrentLog" >
-  <key value="" />
+ <shortcut id="Debugger.Breakpoints">
+  <key value=""/>
  </shortcut>
- <shortcut id="Perforce.DiffSelectedFilesInLog" >
-  <key value="" />
+ <shortcut id="Debugger.Modules">
+  <key value=""/>
  </shortcut>
- <shortcut id="Qt4Builder.RunQMake" >
-  <key value="" />
+ <shortcut id="Debugger.Registers">
+  <key value=""/>
  </shortcut>
- <shortcut id="Qt4Builder.RunQMakeContextMenu" >
-  <key value="" />
+ <shortcut id="Debugger.Debugger">
+  <key value=""/>
  </shortcut>
- <shortcut id="QtScriptEditor.Run" >
-  <key value="Ctrl+R" />
+ <shortcut id="Debugger.Stack">
+  <key value=""/>
  </shortcut>
- <shortcut id="Git.Diff" >
-  <key value="Alt+G, Alt+D" />
+ <shortcut id="Debugger.Source Files">
+  <key value=""/>
  </shortcut>
- <shortcut id="Git.Status" >
-  <key value="Alt+G, Alt+S" />
+ <shortcut id="Debugger.Thread">
+  <key value=""/>
  </shortcut>
- <shortcut id="Git.Log" >
-  <key value="Alt+G, Alt+L" />
+ <shortcut id="Debugger.Locals and Watchers">
+  <key value=""/>
  </shortcut>
- <shortcut id="Git.Blame" >
-  <key value="Alt+G, Alt+B" />
+ <shortcut id="QtCreator.Mode.Debugger.Mode.Debug">
+  <key value="Ctrl+3"/>
  </shortcut>
- <shortcut id="Git.Undo" >
-  <key value="Alt+G, Alt+U" />
+ <shortcut id="TextEditor.EmacsKeysHandler">
+  <key value=""/>
  </shortcut>
- <shortcut id="Git.Stage" >
-  <key value="Alt+G, Alt+A" />
+ <shortcut id="TextEditor.FakeVimHandler">
+  <key value=""/>
  </shortcut>
- <shortcut id="Git.Unstage" >
-  <key value="" />
+ <shortcut id="Help.Home">
+  <key value=""/>
  </shortcut>
- <shortcut id="Git.Revert" >
-  <key value="" />
+ <shortcut id="Help.Previous">
+  <key value="Alt+Left"/>
  </shortcut>
- <shortcut id="Git.DiffProject" >
-  <key value="Alt+G, Alt+Shift+D" />
+ <shortcut id="Help.Next">
+  <key value="Alt+Right"/>
  </shortcut>
- <shortcut id="Git.StatusProject" >
-  <key value="" />
+ <shortcut id="Help.AddBookmark">
+  <key value="Ctrl+M"/>
  </shortcut>
- <shortcut id="Git.LogProject" >
-  <key value="Alt+G, Alt+K" />
+ <shortcut id="Help.Index">
+  <key value=""/>
  </shortcut>
- <shortcut id="Git.UndoProject" >
-  <key value="" />
+ <shortcut id="Help.Contents">
+  <key value=""/>
  </shortcut>
- <shortcut id="Git.Stash" >
-  <key value="" />
+ <shortcut id="Help.Search">
+  <key value=""/>
  </shortcut>
- <shortcut id="Git.Pull" >
-  <key value="" />
+ <shortcut id="Help.Context">
+  <key value="F1"/>
  </shortcut>
- <shortcut id="Git.StashPop" >
-  <key value="" />
+ <shortcut id="QtCreator.Mode.Help">
+  <key value="Ctrl+5"/>
  </shortcut>
- <shortcut id="Git.Commit" >
-  <key value="Alt+G, Alt+C" />
+ <shortcut id="Help.IndexShortcut">
+  <key value="Ctrl+I"/>
  </shortcut>
- <shortcut id="Git.Push" >
-  <key value="" />
+ <shortcut id="Help.ContentsShortcut">
+  <key value="Ctrl+T"/>
  </shortcut>
- <shortcut id="Git.BranchList" >
-  <key value="" />
+ <shortcut id="Help.SearchShortcut">
+  <key value="Ctrl+S"/>
  </shortcut>
- <shortcut id="Git.StashList" >
-  <key value="" />
+ <shortcut id="Help.ResetFontSize">
+  <key value="Ctrl+0"/>
  </shortcut>
- <shortcut id="Git.ShowCommit" >
-  <key value="" />
+ <shortcut id="Perforce.Edit">
+  <key value="Alt+P, Alt+E"/>
  </shortcut>
- <shortcut id="Git.SubmitCurrentLog" >
-  <key value="" />
+ <shortcut id="Perforce.Add">
+  <key value="Alt+P, Alt+A"/>
  </shortcut>
- <shortcut id="Git.DiffSelectedFilesInLog" >
-  <key value="" />
+ <shortcut id="Perforce.Delete">
+  <key value=""/>
  </shortcut>
- <shortcut id="Subversion.Add" >
-  <key value="Alt+S, Alt+A" />
+ <shortcut id="Perforce.Revert">
+  <key value="Alt+P, Alt+R"/>
  </shortcut>
- <shortcut id="Subversion.Delete" >
-  <key value="" />
+ <shortcut id="Perforce.DiffCurrent">
+  <key value=""/>
  </shortcut>
- <shortcut id="Subversion.Revert" >
-  <key value="" />
+ <shortcut id="Perforce.DiffProject">
+  <key value="Alt+P, Alt+D"/>
  </shortcut>
- <shortcut id="Subversion.DiffAll" >
-  <key value="" />
+ <shortcut id="Perforce.DiffAll">
+  <key value=""/>
  </shortcut>
- <shortcut id="Subversion.DiffCurrent" >
-  <key value="Alt+S, Alt+D" />
+ <shortcut id="Perforce.Opened">
+  <key value="Alt+P, Alt+O"/>
  </shortcut>
- <shortcut id="Subversion.CommitAll" >
-  <key value="" />
+ <shortcut id="Perforce.Submit">
+  <key value="Alt+P, Alt+S"/>
  </shortcut>
- <shortcut id="Subversion.CommitCurrent" >
-  <key value="Alt+S, Alt+C" />
+ <shortcut id="Perforce.PendingChanges">
+  <key value=""/>
  </shortcut>
- <shortcut id="Subversion.FilelogCurrent" >
-  <key value="" />
+ <shortcut id="Perforce.UpdateProject">
+  <key value=""/>
  </shortcut>
- <shortcut id="Subversion.AnnotateCurrent" >
-  <key value="" />
+ <shortcut id="Perforce.Describe">
+  <key value=""/>
  </shortcut>
- <shortcut id="Subversion.Describe" >
-  <key value="" />
+ <shortcut id="Perforce.AnnotateCurrent">
+  <key value=""/>
  </shortcut>
- <shortcut id="Subversion.Status" >
-  <key value="" />
+ <shortcut id="Perforce.Annotate">
+  <key value=""/>
  </shortcut>
- <shortcut id="Subversion.Update" >
-  <key value="" />
+ <shortcut id="Perforce.FilelogCurrent">
+  <key value="Alt+P, Alt+F"/>
  </shortcut>
- <shortcut id="Subversion.SubmitCurrentLog" >
-  <key value="" />
+ <shortcut id="Perforce.Filelog">
+  <key value=""/>
  </shortcut>
- <shortcut id="Subversion.DiffSelectedFilesInLog" >
-  <key value="" />
+ <shortcut id="Perforce.UpdateAll">
+  <key value=""/>
  </shortcut>
- <shortcut id="TextEditor.SelectEncoding" >
-  <key value="" />
+ <shortcut id="Perforce.SubmitCurrentLog">
+  <key value=""/>
  </shortcut>
- <shortcut id="TextEditor.AutoIndentSelection" >
-  <key value="Ctrl+I" />
+ <shortcut id="Perforce.DiffSelectedFilesInLog">
+  <key value=""/>
  </shortcut>
- <shortcut id="TextEditor.VisualizeWhitespace" >
-  <key value="Ctrl+E, Ctrl+V" />
+ <shortcut id="Qt4Builder.RunQMake">
+  <key value=""/>
  </shortcut>
- <shortcut id="TextEditor.CleanWhitespace" >
-  <key value="" />
+ <shortcut id="Qt4Builder.RunQMakeContextMenu">
+  <key value=""/>
  </shortcut>
- <shortcut id="TextEditor.TextWrapping" >
-  <key value="Ctrl+E, Ctrl+W" />
+ <shortcut id="Git.Diff">
+  <key value="Alt+G, Alt+D"/>
  </shortcut>
- <shortcut id="TextEditor.UnCommentSelection" >
-  <key value="Ctrl+/" />
+ <shortcut id="Git.Status">
+  <key value="Alt+G, Alt+S"/>
  </shortcut>
- <shortcut id="TextEditor.CutLine" >
-  <key value="Shift+Del" />
+ <shortcut id="Git.Log">
+  <key value="Alt+G, Alt+L"/>
  </shortcut>
- <shortcut id="TextEditor.DeleteLine" >
-  <key value="" />
+ <shortcut id="Git.Blame">
+  <key value="Alt+G, Alt+B"/>
  </shortcut>
- <shortcut id="TextEditor.Collapse" >
-  <key value="Ctrl+&lt;" />
+ <shortcut id="Git.Undo">
+  <key value="Alt+G, Alt+U"/>
  </shortcut>
- <shortcut id="TextEditor.Expand" >
-  <key value="Ctrl+>" />
+ <shortcut id="Git.Stage">
+  <key value="Alt+G, Alt+A"/>
  </shortcut>
- <shortcut id="TextEditor.UnCollapseAll" >
-  <key value="" />
+ <shortcut id="Git.Unstage">
+  <key value=""/>
  </shortcut>
- <shortcut id="TextEditor.IncreaseFontSize" >
-  <key value="Ctrl++" />
+ <shortcut id="Git.DiffProject">
+  <key value="Alt+G, Alt+Shift+D"/>
  </shortcut>
- <shortcut id="TextEditor.DecreaseFontSize" >
-  <key value="Ctrl+-" />
+ <shortcut id="Git.StatusProject">
+  <key value=""/>
  </shortcut>
- <shortcut id="TextEditor.GotoBlockStart" >
-  <key value="Ctrl+[" />
+ <shortcut id="Git.LogProject">
+  <key value="Alt+G, Alt+K"/>
  </shortcut>
- <shortcut id="TextEditor.GotoBlockEnd" >
-  <key value="Ctrl+]" />
+ <shortcut id="Git.UndoProject">
+  <key value=""/>
  </shortcut>
- <shortcut id="TextEditor.GotoBlockStartWithSelection" >
-  <key value="Ctrl+{" />
+ <shortcut id="Git.Stash">
+  <key value=""/>
  </shortcut>
- <shortcut id="TextEditor.GotoBlockEndWithSelection" >
-  <key value="Ctrl+}" />
+ <shortcut id="Git.Pull">
+  <key value=""/>
  </shortcut>
- <shortcut id="TextEditor.SelectBlockUp" >
-  <key value="Ctrl+U" />
+ <shortcut id="Git.StashPop">
+  <key value=""/>
  </shortcut>
- <shortcut id="TextEditor.SelectBlockDown" >
-  <key value="Ctrl+Shift+U" />
+ <shortcut id="Git.Commit">
+  <key value="Alt+G, Alt+C"/>
  </shortcut>
- <shortcut id="TextEditor.MoveLineUp" >
-  <key value="Ctrl+Shift+Up" />
+ <shortcut id="Git.Push">
+  <key value=""/>
  </shortcut>
- <shortcut id="TextEditor.MoveLineDown" >
-  <key value="Ctrl+Shift+Down" />
+ <shortcut id="Git.BranchList">
+  <key value=""/>
  </shortcut>
- <shortcut id="TextEditor.CopyLineUp" >
-  <key value="Ctrl+Alt+Up" />
+ <shortcut id="Git.StashList">
+  <key value=""/>
  </shortcut>
- <shortcut id="TextEditor.CopyLineDown" >
-  <key value="Ctrl+Alt+Down" />
+ <shortcut id="Git.ShowCommit">
+  <key value=""/>
  </shortcut>
- <shortcut id="FindFilter.All Projects" >
-  <key value="" />
+ <shortcut id="Git.SubmitCurrentLog">
+  <key value=""/>
  </shortcut>
- <shortcut id="FindFilter.Current Project" >
-  <key value="" />
+ <shortcut id="Git.DiffSelectedFilesInLog">
+  <key value=""/>
  </shortcut>
- <shortcut id="FindFilter.Files on Disk" >
-  <key value="" />
+ <shortcut id="Subversion.Add">
+  <key value="Alt+S, Alt+A"/>
  </shortcut>
- <shortcut id="FindFilter.Current File" >
-  <key value="" />
+ <shortcut id="Subversion.Delete">
+  <key value=""/>
  </shortcut>
- <shortcut id="QtCreator.Sidebar.Open Documents" >
-  <key value="Alt+O" />
+ <shortcut id="Subversion.Revert">
+  <key value=""/>
  </shortcut>
- <shortcut id="Coreplugin.OutputPane.previtem" >
-  <key value="Shift+F6" />
+ <shortcut id="Subversion.DiffAll">
+  <key value=""/>
  </shortcut>
- <shortcut id="Coreplugin.OutputPane.nextitem" >
-  <key value="F6" />
+ <shortcut id="Subversion.DiffCurrent">
+  <key value="Alt+S, Alt+D"/>
  </shortcut>
- <shortcut id="QtCreator.Pane.BuildIssues" >
-  <key value="Alt+1" />
+ <shortcut id="Subversion.CommitAll">
+  <key value=""/>
  </shortcut>
- <shortcut id="QtCreator.Pane.SearchResults" >
-  <key value="Alt+2" />
+ <shortcut id="Subversion.CommitCurrent">
+  <key value="Alt+S, Alt+C"/>
  </shortcut>
- <shortcut id="QtCreator.Pane.ApplicationOutput" >
-  <key value="Alt+3" />
+ <shortcut id="Subversion.FilelogCurrent">
+  <key value=""/>
  </shortcut>
- <shortcut id="QtCreator.Pane.CompileOutput" >
-  <key value="Alt+4" />
+ <shortcut id="Subversion.AnnotateCurrent">
+  <key value=""/>
  </shortcut>
- <shortcut id="QtCreator.Pane.Perforce" >
-  <key value="" />
+ <shortcut id="Subversion.Describe">
+  <key value=""/>
  </shortcut>
- <shortcut id="QtCreator.Pane.Git" >
-  <key value="" />
+ <shortcut id="Subversion.Status">
+  <key value=""/>
  </shortcut>
- <shortcut id="QtCreator.Pane.Subversion" >
-  <key value="" />
+ <shortcut id="Subversion.Update">
+  <key value=""/>
  </shortcut>
- <shortcut id="QtCreator.Pane.General" >
-  <key value="" />
+ <shortcut id="Subversion.SubmitCurrentLog">
+  <key value=""/>
+ </shortcut>
+ <shortcut id="Subversion.DiffSelectedFilesInLog">
+  <key value=""/>
+ </shortcut>
+ <shortcut id="QtCreator.Mode.Welcome">
+  <key value="Ctrl+1"/>
+ </shortcut>
+ <shortcut id="FindFilter.All Projects">
+  <key value=""/>
+ </shortcut>
+ <shortcut id="FindFilter.Current Project">
+  <key value=""/>
+ </shortcut>
+ <shortcut id="FindFilter.Files on Disk">
+  <key value=""/>
+ </shortcut>
+ <shortcut id="FindFilter.Current File">
+  <key value=""/>
+ </shortcut>
+ <shortcut id="QtCreator.Sidebar.Open Documents">
+  <key value="Alt+O"/>
+ </shortcut>
+ <shortcut id="Coreplugin.OutputPane.previtem">
+  <key value="Shift+F6"/>
+ </shortcut>
+ <shortcut id="Coreplugin.OutputPane.nextitem">
+  <key value="F6"/>
+ </shortcut>
+ <shortcut id="QtCreator.Pane.BuildIssues">
+  <key value="Alt+1"/>
+ </shortcut>
+ <shortcut id="QtCreator.Pane.SearchResults">
+  <key value="Alt+2"/>
+ </shortcut>
+ <shortcut id="QtCreator.Pane.ApplicationOutput">
+  <key value="Alt+3"/>
+ </shortcut>
+ <shortcut id="QtCreator.Pane.CompileOutput">
+  <key value="Alt+4"/>
+ </shortcut>
+ <shortcut id="QtCreator.Pane.VersionControl">
+  <key value=""/>
+ </shortcut>
+ <shortcut id="QtCreator.Pane.General">
+  <key value=""/>
  </shortcut>
 </mapping>
