@@ -33,13 +33,17 @@ M-w, C-k, M-d and M-Backspace.
 Build Instructions
 ==================
 
-* Download the source of Qt Creator version 1.2.1 (other versions might work too).
+* Download the source of Qt Creator version 1.2.1 or build against version
+  1.3.1 and checkout the branch "v1.3.1" from the emacskeys repository instead
+  of master.
 * cd src/plugins/
 * git clone git://github.com/fberger/emacskeys.git
 * patch -p 3 < emacskeys/plugins.pro.patch
 * cd ../../
 * qmake && make
 * bin/qtcreator
+* Load EmacsKeys.kms from Options -> Environment -> Keyboard
+* Activate EmacskKeys
 
 Credit
 ======
