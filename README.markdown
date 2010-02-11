@@ -43,7 +43,7 @@ Build Instructions
 * qmake && make
 * bin/qtcreator
 * Load EmacsKeys.kms from Options -> Environment -> Keyboard
-* Activate EmacskKeys
+* Activate EmacsKeys
 
 Credit
 ======
