@@ -21,6 +21,8 @@
 
 
 #include <coreplugin/actionmanager/actionmanager.h>
+#include <coreplugin/actionmanager/actioncontainer.h>
+#include <coreplugin/actionmanager/command.h>
 #include <coreplugin/coreconstants.h>
 #include <coreplugin/editormanager/editormanager.h>
 #include <coreplugin/filemanager.h>
@@ -63,7 +65,7 @@
 #include <QtGui/QTextCursor>
 #include <QtGui/QTextEdit>
 #include <QtGui/QMainWindow>
-
+#include <QtGui/QMenu>
 
 using namespace EmacsKeys::Internal;
 using namespace TextEditor;
@@ -102,6 +104,9 @@ public:
     QString trName() const { return tr("General"); }
     QString category() const { return QLatin1String("EmacsKeys"); }
     QString trCategory() const { return tr("EmacsKeys"); }
+    QString displayName() const { return tr("General"); }
+    QString displayCategory() const { return tr("EmacsKeys"); }
+    QIcon categoryIcon() const { return QIcon(); }
 
     QWidget *createPage(QWidget *parent);
     void apply() { m_group.apply(ICore::instance()->settings()); }
