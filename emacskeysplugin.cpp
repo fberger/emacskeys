@@ -36,6 +36,7 @@
 #include <projectexplorer/projectexplorerconstants.h>
 #include <projectexplorer/session.h>
 
+#include <texteditor/basetextdocumentlayout.h>
 #include <texteditor/basetexteditor.h>
 #include <texteditor/basetextmark.h>
 #include <texteditor/completionsupport.h>

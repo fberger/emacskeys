@@ -497,7 +497,7 @@ void EmacsKeysHandler::Private::yankPop(QWidget* view)
   if (!next.isEmpty()) {
     qDebug() << "yanking " << next << endl;
     beginEditBlock();
-    m_tc.setPosition(yankStartPosition, QTextCursor::KeepAnchor);
+    m_tc.setPosition(yankStartPosition, KeepAnchor);
     m_tc.removeSelectedText();
     m_tc.insertText(next);
     yankEndPosition = m_tc.position();
@@ -544,7 +544,7 @@ void EmacsKeysHandler::Private::copy()
   if (mark.valid) {
     beginEditBlock();
     int position = m_tc.position();
-    m_tc.setPosition(mark.position, QTextCursor::KeepAnchor);
+    m_tc.setPosition(mark.position, KeepAnchor);
     QApplication::clipboard()->setText(m_tc.selectedText());
     m_tc.clearSelection();
     m_tc.setPosition(position);
@@ -561,7 +561,7 @@ void EmacsKeysHandler::Private::cut()
   Mark mark(markRing.getMostRecentMark());
   if (mark.valid) {
     beginEditBlock();
-    m_tc.setPosition(mark.position, QTextCursor::KeepAnchor);
+    m_tc.setPosition(mark.position, KeepAnchor);
     QApplication::clipboard()->setText(m_tc.selectedText());
     m_tc.removeSelectedText();
     endEditBlock();
@@ -589,7 +589,7 @@ void EmacsKeysHandler::Private::killLine()
   beginEditBlock();
   int position = m_tc.position();
   qDebug() << "current position " << position << endl;
-  m_tc.movePosition(QTextCursor::EndOfLine, QTextCursor::KeepAnchor);
+  m_tc.movePosition(EndOfLine, KeepAnchor);
   if (position == m_tc.position()) {
       qDebug() << "at line end" << endl;
       // at the end of the line, just delete new line character
@@ -608,7 +608,7 @@ void EmacsKeysHandler::Private::killWord()
   int position = m_tc.position();
   qDebug() << "current position " << position << endl;
   beginEditBlock();
-  m_tc.movePosition(QTextCursor::NextWord, QTextCursor::KeepAnchor);
+  m_tc.movePosition(QTextCursor::NextWord, KeepAnchor);
   if (position != m_tc.position()) {
       qDebug() << "invoke cut" << endl;
       QApplication::clipboard()->setText(m_tc.selectedText());
@@ -625,7 +625,7 @@ void EmacsKeysHandler::Private::backwardKillWord()
   int position = m_tc.position();
   qDebug() << "current position " << position << endl;
   beginEditBlock();
-  m_tc.movePosition(QTextCursor::PreviousWord, QTextCursor::KeepAnchor);
+  m_tc.movePosition(QTextCursor::PreviousWord, KeepAnchor);
   if (position != m_tc.position()) {
       qDebug() << "invoke cut" << endl;
       QApplication::clipboard()->setText(m_tc.selectedText());
@@ -686,9 +686,9 @@ EventResult EmacsKeysHandler::Private::handleEvent(QKeyEvent *ev)
 
     EventResult result = EventHandled;
     if (exactMatch(Qt::CTRL + Qt::Key_N, keySequence)) {
-        m_tc.movePosition(QTextCursor::Down, QTextCursor::MoveAnchor);
+        m_tc.movePosition(Down, MoveAnchor);
     } else if (exactMatch(Qt::CTRL + Qt::Key_P, keySequence)) {
-        m_tc.movePosition(QTextCursor::Up, QTextCursor::MoveAnchor);
+        m_tc.movePosition(Up, MoveAnchor);
     } else if (exactMatch(Qt::CTRL + Qt::Key_A, keySequence)) {
         moveToStartOfLine();
     } else if (exactMatch(Qt::CTRL + Qt::Key_E, keySequence)) {
@@ -708,9 +708,9 @@ EventResult EmacsKeysHandler::Private::handleEvent(QKeyEvent *ev)
     } else if (exactMatch(Qt::CTRL + Qt::Key_D, keySequence)) {
         m_tc.deleteChar();
     } else if (exactMatch(Qt::ALT + Qt::SHIFT + Qt::Key_Less, keySequence)) {
-        m_tc.movePosition(QTextCursor::Start, QTextCursor::MoveAnchor);
+        m_tc.movePosition(StartOfDocument, MoveAnchor);
     } else if (exactMatch(Qt::ALT + Qt::SHIFT + Qt::Key_Greater, keySequence)) {
-        m_tc.movePosition(QTextCursor::End, QTextCursor::MoveAnchor);
+        m_tc.movePosition(EndOfDocument, MoveAnchor);
     } else if (exactMatch(Qt::CTRL + Qt::Key_V, keySequence)) {
         moveDown(count() * (linesOnScreen() - 2) - cursorLineOnScreen());
         scrollToLineInDocument(cursorLineInDocument());
