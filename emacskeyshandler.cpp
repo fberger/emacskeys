@@ -717,7 +717,8 @@ EventResult EmacsKeysHandler::Private::handleEvent(QKeyEvent *ev)
     } else if (exactMatch(Qt::ALT + Qt::Key_V, keySequence)) {
         moveUp(count() * (linesOnScreen() - 2) + cursorLineOnScreen());
         scrollToLineInDocument(cursorLineInDocument() + linesOnScreen() - 2);
-    } else if (exactMatch(Qt::CTRL + Qt::Key_Space, keySequence)) {
+    } else if (exactMatch(Qt::CTRL + Qt::Key_Space, keySequence)
+        || exactMatch(Qt::CTRL + Qt::SHIFT + Qt::Key_At, keySequence)) {
         setMark();
     } else if (exactMatch(Qt::CTRL + Qt::Key_K, keySequence)) {
         killLine();
@@ -729,6 +730,9 @@ EventResult EmacsKeysHandler::Private::handleEvent(QKeyEvent *ev)
         cut();
     } else if (exactMatch(Qt::ALT + Qt::Key_W, keySequence)) {
         copy();
+    } else if (exactMatch(Qt::CTRL + Qt::Key_L, keySequence)) {
+        scrollUp(linesOnScreen() / 2 - cursorLineOnScreen());
+        finishMovement();
     } else if (QKeySequence(Qt::CTRL + Qt::Key_U, Qt::CTRL + Qt::Key_Space).matches(keySequence) == QKeySequence::ExactMatch) {
         popToMark();
     } else if (QKeySequence(Qt::CTRL + Qt::Key_X, Qt::Key_X).matches(keySequence) == QKeySequence::ExactMatch) {
