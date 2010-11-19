@@ -103,7 +103,7 @@ EmacsKeysSettings *theEmacsKeysSettings()
 
     const QString group = QLatin1String("EmacsKeys");
     item = new SavedAction(instance);
-    item->setText(QCoreApplication::translate("EmacsKeys::Internal", "Toggle vim-style editing"));
+    item->setText(QCoreApplication::translate("EmacsKeys::Internal", "Toggle EmacsKeys Mode"));
     item->setSettingsKey(group, QLatin1String("UseEmacsKeys"));
     item->setCheckable(true);
     instance->insertItem(ConfigUseEmacsKeys, item);
