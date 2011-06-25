@@ -1,4 +1,4 @@
-<plugin name="EmacsKeys" version="2.0.1" compatVersion="2.0.1">
+<plugin name="EmacsKeys" version="2.2.1" compatVersion="2.2.1">
     <vendor>Felix Berger</vendor>
     <copyright>(C) 2008-2009 Nokia Corporation</copyright>
     <copyright>(C) 2010 Felix Berger</copyright>
@@ -18,11 +18,10 @@ Foundation.  Please review the following information to
 ensure the GNU Lesser General Public License version 2.1 requirements
 will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.</license>
     <description>Emacs Keys</description>
-    <url>http://www.qtsoftware.com</url>
+    <url>http://github.com/fberger/emacskeys/</url>
     <dependencyList>
-        <dependency name="CppEditor" version="2.0.1"/><!-- Plugin adds items to the editor's context menu -->
-        <dependency name="TextEditor" version="2.0.1"/>
-        <dependency name="ProjectExplorer" version="2.0.1"/>
-        <dependency name="Core" version="2.0.1"/>
+        <dependency name="TextEditor" version="2.2.1"/>
+        <dependency name="ProjectExplorer" version="2.2.1"/>
+        <dependency name="Core" version="2.2.1"/>
     </dependencyList>
 </plugin>

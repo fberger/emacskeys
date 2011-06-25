@@ -44,14 +44,13 @@
 #include <texteditor/texteditorconstants.h>
 #include <texteditor/tabsettings.h>
 #include <texteditor/texteditorsettings.h>
-#include <texteditor/textblockiterator.h>
 
 #include <find/textfindconstants.h>
 
 #include <utils/qtcassert.h>
 #include <utils/savedaction.h>
 
-#include <indenter.h>
+#include <texteditor/indenter.h>
 
 #include <QtCore/QDebug>
 #include <QtCore/QtPlugin>
@@ -245,7 +244,7 @@ private slots:
     void quitFile(bool forced);
     void quitAllFiles(bool forced);
     void moveToMatchingParenthesis(bool *moved, bool *forward, QTextCursor *cursor);
-    void indentRegion(int *amount, int beginLine, int endLine,  QChar typedChar);
+    void indentRegion(int beginLine, int endLine,  QChar typedChar);
 
 private:
     EmacsKeysPlugin *q;
@@ -288,8 +287,7 @@ bool EmacsKeysPluginPrivate::initialize()
     q->addObject(m_emacsKeysOptionsPage);
     theEmacsKeysSettings()->readSettings(Core::ICore::instance()->settings());
     
-    QList<int> globalcontext;
-    globalcontext << Core::Constants::C_GLOBAL_ID;
+    Context globalcontext(Core::Constants::C_GLOBAL);
     Core::Command *cmd = 0;
     cmd = actionManager->registerAction(theEmacsKeysSetting(ConfigUseEmacsKeys),
         Constants::INSTALL_HANDLER, globalcontext);
@@ -446,8 +444,8 @@ void EmacsKeysPluginPrivate::editorOpened(Core::IEditor *editor)
         this, SLOT(changeSelection(QList<QTextEdit::ExtraSelection>)));
     connect(handler, SIGNAL(moveToMatchingParenthesis(bool*,bool*,QTextCursor*)),
         this, SLOT(moveToMatchingParenthesis(bool*,bool*,QTextCursor*)));
-    connect(handler, SIGNAL(indentRegion(int*,int,int,QChar)),
-        this, SLOT(indentRegion(int*,int,int,QChar)));
+    connect(handler, SIGNAL(indentRegion(int,int,QChar)),
+        this, SLOT(indentRegion(int,int,QChar)));
     connect(handler, SIGNAL(completionRequested()),
         this, SLOT(triggerCompletions()));
     connect(handler, SIGNAL(windowCommandRequested(int)),
@@ -495,10 +493,10 @@ void EmacsKeysPluginPrivate::triggerCompletions()
     EmacsKeysHandler *handler = qobject_cast<EmacsKeysHandler *>(sender());
     if (!handler)
         return;
-    if (BaseTextEditor *bt = qobject_cast<BaseTextEditor *>(handler->widget()))
-        TextEditor::Internal::CompletionSupport::instance()->
-            autoComplete(bt->editableInterface(), false);
-   //     bt->triggerCompletions();
+    if (BaseTextEditorWidget *editor = qobject_cast<BaseTextEditorWidget *>(handler->widget()))
+        CompletionSupport::instance()->
+            complete(editor->editor(), TextCompletion, false);
+   //     editor->triggerCompletions();
 }
 
 void EmacsKeysPluginPrivate::quitFile(bool forced)
@@ -572,47 +570,46 @@ void EmacsKeysPluginPrivate::moveToMatchingParenthesis(bool *moved, bool *forwar
     }
 }
 
-void EmacsKeysPluginPrivate::indentRegion(int *amount, int beginLine, int endLine,
+void EmacsKeysPluginPrivate::indentRegion(int beginLine, int endLine,
       QChar typedChar)
 {
     EmacsKeysHandler *handler = qobject_cast<EmacsKeysHandler *>(sender());
     if (!handler)
         return;
 
-    BaseTextEditor *bt = qobject_cast<BaseTextEditor *>(handler->widget());
+    BaseTextEditorWidget *bt = qobject_cast<BaseTextEditorWidget *>(handler->widget());
     if (!bt)
         return;
 
-    TextEditor::TabSettings tabSettings = 
+    TextEditor::TabSettings oldTabSettings = 
         TextEditor::TextEditorSettings::instance()->tabSettings();
-    typedef SharedTools::Indenter<TextEditor::TextBlockIterator> Indenter;
-    Indenter &indenter = Indenter::instance();
-    indenter.setIndentSize(tabSettings.m_indentSize);
-    indenter.setTabSize(tabSettings.m_tabSize);
+    TabSettings tabSettings;
+    tabSettings.m_indentSize = theEmacsKeysSetting(ConfigShiftWidth)->value().toInt();
+    tabSettings.m_tabSize = theEmacsKeysSetting(ConfigTabStop)->value().toInt();
+    tabSettings.m_spacesForTabs = theEmacsKeysSetting(ConfigExpandTab)->value().toBool();
+    bt->setTabSettings(tabSettings);
 
-    const QTextDocument *doc = bt->document();
-    QTextBlock begin = doc->findBlockByNumber(beginLine);
-    QTextBlock end = doc->findBlockByNumber(endLine);
-    const TextEditor::TextBlockIterator docStart(doc->begin());
-    QTextBlock cur = begin;
-    do {
-        if (typedChar == 0 && cur.text().simplified().isEmpty()) {
-            *amount = 0;
-            if (cur != end) {
-                QTextCursor cursor(cur);
-                while (!cursor.atBlockEnd())
-                    cursor.deleteChar();
-            }
+    QTextDocument *doc = bt->document();
+    QTextBlock startBlock = doc->findBlockByNumber(beginLine);
+    
+    // Record line lenghts for mark adjustments
+    QVector<int> lineLengths(endLine - beginLine + 1);
+    QTextBlock block = startBlock;
+    
+    for (int i = beginLine; i <= endLine; ++i) {
+        lineLengths[i - beginLine] = block.text().length();
+        if (typedChar == 0 && block.text().simplified().isEmpty()) {
+	  // clear empty lines
+	  QTextCursor cursor(block);
+	  while (!cursor.atBlockEnd())
+	    cursor.deleteChar();
         } else {
-            const TextEditor::TextBlockIterator current(cur);
-            const TextEditor::TextBlockIterator next(cur.next());
-            *amount = indenter.indentForBottomLine(current, docStart, next, typedChar);
-            if (cur != end)
-                tabSettings.indentLine(cur, *amount);
+	  bt->indenter()->indentBlock(doc, block, typedChar, bt);
         }
-        if (cur != end)
-           cur = cur.next();
-    } while (cur != end);
+        block = block.next();
+    }
+    
+    bt->setTabSettings(oldTabSettings);
 }
 
 void EmacsKeysPluginPrivate::quitEmacsKeys()
@@ -639,8 +636,8 @@ void EmacsKeysPluginPrivate::changeSelection
     (const QList<QTextEdit::ExtraSelection> &selection)
 {
     if (EmacsKeysHandler *handler = qobject_cast<EmacsKeysHandler *>(sender()))
-        if (BaseTextEditor *bt = qobject_cast<BaseTextEditor *>(handler->widget()))
-            bt->setExtraSelections(BaseTextEditor::FakeVimSelection, selection);
+        if (BaseTextEditorWidget *bt = qobject_cast<BaseTextEditorWidget *>(handler->widget()))
+            bt->setExtraSelections(BaseTextEditorWidget::FakeVimSelection, selection);
 }
 
 
