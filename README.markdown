@@ -19,7 +19,8 @@ clipboards content. Caveat: It only works when text is inserted into it with
 C-W, M-w, C-k, M-d and M-Backspace.
 
 * The following keys work as expected: C-n, C-p, C-a, C-e, C-b, C-f, M-b, M-f,
-  M-d, M-Backspace, C-d, M-<, M->, C-v, M-v, C-Space, C-k, C-y, M-y, C-w, M-w.
+  M-d, M-Backspace, C-d, M-<, M->, C-v, M-v, C-Space, C-k, C-y, M-y, C-w, M-w,
+  C-l, C-@.
 
 * C-x,b opens the quick open dialog at the bottom left.
 
@@ -36,7 +37,7 @@ Build Instructions
 * Download the source of Qt Creator and and checkout the branch with the respective version number. For instance, if you download Qt Creator v2.2.1, checkout branch v2.2.1.
 * cd src/plugins/
 * git clone git://github.com/fberger/emacskeys.git
-* git checkout [origin/v2.2.1|origin/v2.0] -b local
+* git checkout [origin/v2.2.1|origin/v2.0.1] -b local
 * patch -p 3 < emacskeys/plugins.pro.patch
 * cd ../../
 * qmake && make
