@@ -37,7 +37,7 @@ Build Instructions
 * Download the source of Qt Creator and and checkout the branch with the respective version number. For instance, if you download Qt Creator v2.2.1, checkout branch v2.2.1.
 * cd src/plugins/
 * git clone git://github.com/fberger/emacskeys.git
-* git checkout [origin/v2.2.1|origin/v2.0.1] -b local
+* git checkout -b local [origin/v2.2.1|origin/v2.0.1]
 * patch -p 3 < emacskeys/plugins.pro.patch
 * cd ../../
 * qmake && make
