@@ -1,7 +1,7 @@
 #ifndef MARK_H
 #define MARK_H
 
-struct Mark 
+struct Mark
 {
   Mark(int position)
     : valid(true), position(position)

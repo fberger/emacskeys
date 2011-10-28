@@ -7,7 +7,7 @@
 KillRing::KillRing()
   : currentView(0), iter(ring.begin()), ignore(false)
 {
-  connect(QApplication::clipboard(), SIGNAL(dataChanged()), 
+  connect(QApplication::clipboard(), SIGNAL(dataChanged()),
 	  SLOT(clipboardDataChanged()));
 }
 
@@ -70,7 +70,7 @@ QWidget* KillRing::currentYankView() const
 
 void KillRing::clipboardDataChanged()
 {
-  qDebug() << "clipboard changed " << QApplication::clipboard()->text() 
+  qDebug() << "clipboard changed " << QApplication::clipboard()->text()
 	    << endl;
   // TODO handle mouse selection too, optionally
   QString text(QApplication::clipboard()->text());

@@ -64,9 +64,9 @@ public:
     void writeSettings(QSettings *settings);
 
 private:
-    QHash<int, Core::Utils::SavedAction *> m_items; 
-    QHash<QString, int> m_nameToCode; 
-    QHash<int, QString> m_codeToName; 
+    QHash<int, Core::Utils::SavedAction *> m_items;
+    QHash<QString, int> m_nameToCode;
+    QHash<int, QString> m_codeToName;
 };
 
 EmacsKeysSettings *theEmacsKeysSettings();
