@@ -4,6 +4,11 @@ EmacsKeys
 EmacsKeys is a plugin that brings Emacs key bindings and functionality to the
 Qt Creator IDE.
 
+Latest Updates
+==============
+
+For a version that works with version 2.5.2 of Qt Creator, see repository: https://github.com/mrjames313/emacskeys.
+
 Features
 ========
 
