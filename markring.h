@@ -14,7 +14,7 @@ public:
   void addMark(int position);
   Mark getPreviousMark();
   Mark getMostRecentMark();
-  
+
 private:
   QList<Mark> ring;
   QList<Mark>::Iterator iter;

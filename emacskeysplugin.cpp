@@ -125,28 +125,28 @@ QWidget *EmacsKeysOptionPage::createPage(QWidget *parent)
     m_ui.setupUi(w);
 
     m_group.clear();
-    m_group.insert(theEmacsKeysSetting(ConfigUseEmacsKeys), 
+    m_group.insert(theEmacsKeysSetting(ConfigUseEmacsKeys),
         m_ui.checkBoxUseEmacsKeys);
 
-    m_group.insert(theEmacsKeysSetting(ConfigExpandTab), 
+    m_group.insert(theEmacsKeysSetting(ConfigExpandTab),
         m_ui.checkBoxExpandTab);
-    m_group.insert(theEmacsKeysSetting(ConfigHlSearch), 
+    m_group.insert(theEmacsKeysSetting(ConfigHlSearch),
         m_ui.checkBoxHlSearch);
-    m_group.insert(theEmacsKeysSetting(ConfigShiftWidth), 
+    m_group.insert(theEmacsKeysSetting(ConfigShiftWidth),
         m_ui.lineEditShiftWidth);
 
-    m_group.insert(theEmacsKeysSetting(ConfigSmartTab), 
+    m_group.insert(theEmacsKeysSetting(ConfigSmartTab),
         m_ui.checkBoxSmartTab);
-    m_group.insert(theEmacsKeysSetting(ConfigStartOfLine), 
+    m_group.insert(theEmacsKeysSetting(ConfigStartOfLine),
         m_ui.checkBoxStartOfLine);
-    m_group.insert(theEmacsKeysSetting(ConfigTabStop), 
+    m_group.insert(theEmacsKeysSetting(ConfigTabStop),
         m_ui.lineEditTabStop);
-    m_group.insert(theEmacsKeysSetting(ConfigBackspace), 
+    m_group.insert(theEmacsKeysSetting(ConfigBackspace),
         m_ui.lineEditBackspace);
 
-    m_group.insert(theEmacsKeysSetting(ConfigAutoIndent), 
+    m_group.insert(theEmacsKeysSetting(ConfigAutoIndent),
         m_ui.checkBoxAutoIndent);
-    m_group.insert(theEmacsKeysSetting(ConfigIncSearch), 
+    m_group.insert(theEmacsKeysSetting(ConfigIncSearch),
         m_ui.checkBoxIncSearch);
 
     connect(m_ui.pushButtonCopyTextEditorSettings, SIGNAL(clicked()),
@@ -161,9 +161,9 @@ QWidget *EmacsKeysOptionPage::createPage(QWidget *parent)
 
 void EmacsKeysOptionPage::copyTextEditorSettings()
 {
-    TextEditor::TabSettings ts = 
+    TextEditor::TabSettings ts =
         TextEditor::TextEditorSettings::instance()->tabSettings();
-    
+
     m_ui.checkBoxExpandTab->setChecked(ts.m_spacesForTabs);
     m_ui.lineEditTabStop->setText(QString::number(ts.m_tabSize));
     m_ui.lineEditShiftWidth->setText(QString::number(ts.m_indentSize));
@@ -253,7 +253,7 @@ private:
 } // namespace EmacsKeys
 
 EmacsKeysPluginPrivate::EmacsKeysPluginPrivate(EmacsKeysPlugin *plugin)
-{       
+{
     q = plugin;
     m_emacsKeysOptionsPage = 0;
 }
@@ -281,7 +281,7 @@ bool EmacsKeysPluginPrivate::initialize()
     m_emacsKeysOptionsPage = new EmacsKeysOptionPage;
     q->addObject(m_emacsKeysOptionsPage);
     theEmacsKeysSettings()->readSettings(Core::ICore::instance()->settings());
-    
+
     QList<int> globalcontext;
     globalcontext << Core::Constants::C_GLOBAL_ID;
     Core::Command *cmd = 0;
@@ -417,7 +417,7 @@ void EmacsKeysPluginPrivate::editorOpened(Core::IEditor *editor)
     // we can only handle QTextEdit and QPlainTextEdit
     if (!qobject_cast<QTextEdit *>(widget) && !qobject_cast<QPlainTextEdit *>(widget))
         return;
-    
+
     //qDebug() << "OPENING: " << editor << editor->widget()
     //    << "MODE: " << theEmacsKeysSetting(ConfigUseEmacsKeys)->value();
 
@@ -451,7 +451,7 @@ void EmacsKeysPluginPrivate::editorOpened(Core::IEditor *editor)
 
     handler->setCurrentFileName(editor->file()->fileName());
     handler->installEventFilter();
-    
+
     // pop up the bar
     if (theEmacsKeysSetting(ConfigUseEmacsKeys)->value().toBool())
        showCommandBuffer("");
@@ -468,8 +468,8 @@ void EmacsKeysPluginPrivate::setUseEmacsKeys(const QVariant &value)
     //qDebug() << "SET USE EMACSKEYS" << value;
     bool on = value.toBool();
     if (on) {
-        Core::EditorManager::instance()->showEditorStatusBar( 
-            QLatin1String(Constants::MINI_BUFFER), 
+        Core::EditorManager::instance()->showEditorStatusBar(
+            QLatin1String(Constants::MINI_BUFFER),
             "vi emulation mode. Type :q to leave. Use , Ctrl-R to trigger run.",
             tr("Quit EmacsKeys"), this, SLOT(quitEmacsKeys()));
         foreach (Core::IEditor *editor, m_editorToHandler.keys())
@@ -525,7 +525,7 @@ void EmacsKeysPluginPrivate::writeFile(bool *handled,
         file->save(fileName);
         Core::ICore::instance()->fileManager()->unblockFileChange(file);
         *handled = true;
-    } 
+    }
 }
 
 void EmacsKeysPluginPrivate::moveToMatchingParenthesis(bool *moved, bool *forward,
@@ -575,7 +575,7 @@ void EmacsKeysPluginPrivate::indentRegion(int *amount, int beginLine, int endLin
     if (!bt)
         return;
 
-    TextEditor::TabSettings tabSettings = 
+    TextEditor::TabSettings tabSettings =
         TextEditor::TextEditorSettings::instance()->tabSettings();
     typedef SharedTools::Indenter<TextEditor::TextBlockIterator> Indenter;
     Indenter &indenter = Indenter::instance();
@@ -615,7 +615,7 @@ void EmacsKeysPluginPrivate::quitEmacsKeys()
 void EmacsKeysPluginPrivate::showCommandBuffer(const QString &contents)
 {
     //qDebug() << "SHOW COMMAND BUFFER" << contents;
-    Core::EditorManager::instance()->showEditorStatusBar( 
+    Core::EditorManager::instance()->showEditorStatusBar(
         QLatin1String(Constants::MINI_BUFFER), contents,
         tr("Quit EmacsKeys"), this, SLOT(quitEmacsKeys()));
 }

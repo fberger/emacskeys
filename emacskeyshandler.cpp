@@ -39,7 +39,7 @@
 //   There is always a "current" cursor (m_tc). A current "region of interest"
 //   spans between m_anchor (== anchor()) and  m_tc.position() (== position())
 //   The value of m_tc.anchor() is not used.
-// 
+//
 
 #include <utils/qtcassert.h>
 
@@ -643,7 +643,7 @@ void EmacsKeysHandler::Private::charactersInserted(int l, int c, const QString& 
   KillRing::instance()->setCurrentYankView(view);
   startLine = l;
   startColumn = c;
-  KTextEditor::viewCursorInterface(view)->cursorPositionReal(&endLine, 
+  KTextEditor::viewCursorInterface(view)->cursorPositionReal(&endLine,
 							     &endColumn);
 }
 
@@ -671,7 +671,7 @@ EventResult EmacsKeysHandler::Private::handleEvent(QKeyEvent *ev)
         setTargetColumn();
 
     m_tc.setVisualNavigation(true);
-    
+
     if (m_fakeEnd)
         moveRight();
 
@@ -1090,7 +1090,7 @@ EventResult EmacsKeysHandler::Private::handleCommandMode(int key, int unmodified
         finishMovement();
     } else if (m_submode == DeleteSubMode && key == 'd') { // tested
         moveToStartOfLine();
-        setTargetColumn(); 
+        setTargetColumn();
         setAnchor();
         moveDown(count());
         m_moveType = MoveLineWise;
@@ -1765,7 +1765,7 @@ EventResult EmacsKeysHandler::Private::handleInsertMode(int key, int,
         m_lastInsertion += "\n";
         insertAutomaticIndentation(true);
     } else if (key == Key_Backspace || key == control('h')) {
-        if (!removeAutomaticIndentation()) 
+        if (!removeAutomaticIndentation())
             if (!m_lastInsertion.isEmpty() || hasConfig(ConfigBackspace, "start")) {
                 m_tc.deletePreviousChar();
                 m_lastInsertion.chop(1);

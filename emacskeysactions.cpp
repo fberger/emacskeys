@@ -16,7 +16,7 @@
 
 #include "emacskeysactions.h"
 
-// Please do not add any direct dependencies to other Qt Creator code  here. 
+// Please do not add any direct dependencies to other Qt Creator code  here.
 // Instead emit signals and let the EmacsKeysPlugin channel the information to
 // Qt Creator. The idea is to keep this file here in a "clean" state that
 // allows easy reuse with any QTextEdit or QPlainTextEdit derived class.
@@ -53,7 +53,7 @@ EmacsKeysSettings::~EmacsKeysSettings()
 {
     qDeleteAll(m_items);
 }
-    
+
 void EmacsKeysSettings::insertItem(int code, SavedAction *item,
     const QString &longName, const QString &shortName)
 {
@@ -79,7 +79,7 @@ void EmacsKeysSettings::writeSettings(QSettings *settings)
     foreach (SavedAction *item, m_items)
         item->writeSettings(settings);
 }
-   
+
 SavedAction *EmacsKeysSettings::item(int code)
 {
     QTC_ASSERT(m_items.value(code, 0), qDebug() << "CODE: " << code; return 0);
